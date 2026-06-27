@@ -1652,7 +1652,7 @@
        EXPLODED PRODUCT VIEW
     ============================================================ */
     .explode-section {
-      height: 260vh;
+      height: 320vh;
       position: relative;
       background: var(--bg-surface);
       border-top: 1px solid var(--border);
@@ -1684,8 +1684,8 @@
     #rotWrap.dragging { cursor: grabbing; }
     .explode-stage {
       position: relative;
-      width: 480px;
-      height: 480px;
+      width: 640px;
+      height: 600px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -1705,19 +1705,19 @@
       left: 50%;
       transform: translateX(-50%);
       opacity: 0;
-      font-size: 0.7rem;
+      font-size: 0.75rem;
       font-weight: 600;
       letter-spacing: 0.03em;
       color: var(--white);
-      background: rgba(8,8,8,0.94);
+      background: rgba(8,8,8,0.96);
       backdrop-filter: blur(14px);
-      border: 1px solid rgba(0,212,170,0.32);
+      border: 1px solid rgba(0,212,170,0.38);
       border-radius: 10px;
-      padding: 10px 16px;
+      padding: 11px 18px;
       pointer-events: none;
       z-index: 30;
       text-align: center;
-      width: 176px;
+      width: 200px;
       line-height: 1.55;
       white-space: normal;
       transition: opacity 0.35s ease;
@@ -1854,7 +1854,7 @@
     }
 
     @media (max-width: 768px) {
-      .explode-stage { width: 280px; height: 280px; }
+      .explode-stage { width: 340px; height: 340px; }
       .nav-links { display: none; }
       .nav-cta   { display: none; }
       .hamburger { display: flex; }
@@ -1883,6 +1883,102 @@
       .shop-signup { padding: 32px 20px; }
       .ai-doctor-callout { padding: 28px 24px; }
     }
+
+    /* ============================================================
+       INTERACTIVE ENHANCEMENTS
+    ============================================================ */
+
+    /* Cursor ambient glow */
+    #cursor-glow {
+      position: fixed; width: 380px; height: 380px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(0,212,170,0.055) 0%, transparent 65%);
+      pointer-events: none; z-index: 9998;
+      transform: translate(-50%,-50%);
+      transition: opacity 0.4s;
+      opacity: 0;
+    }
+
+    /* Button ripple */
+    .btn { overflow: hidden; }
+    .btn .btn-ripple {
+      position: absolute; border-radius: 50%;
+      transform: scale(0);
+      animation: rippleOut 0.52s ease-out forwards;
+      background: rgba(255,255,255,0.22);
+      pointer-events: none;
+    }
+    @keyframes rippleOut { to { transform: scale(4.5); opacity: 0; } }
+
+    /* Tier cards — per-level color themes */
+    .tier-card { cursor: pointer; transition: border-color 0.28s, box-shadow 0.28s, transform 0.28s, opacity 0.28s; }
+    .tier-card[data-tier="light"].active  { border-color: #4ab8ff; box-shadow: 0 0 0 1px #4ab8ff, 0 10px 40px rgba(74,184,255,0.2); }
+    .tier-card[data-tier="light"].active .tier-dot  { background: #4ab8ff; box-shadow: 0 0 14px #4ab8ff; }
+    .tier-card[data-tier="light"].active .tier-name { color: #4ab8ff; }
+    .tier-card[data-tier="medium"].active { border-color: var(--teal); box-shadow: 0 0 0 1px var(--teal), 0 10px 40px var(--teal-glow); }
+    .tier-card[data-tier="medium"].active .tier-dot  { background: var(--teal); box-shadow: 0 0 14px var(--teal); }
+    .tier-card[data-tier="medium"].active .tier-name { color: var(--teal); }
+    .tier-card[data-tier="max"].active    { border-color: #ff6b35; box-shadow: 0 0 0 1px #ff6b35, 0 10px 40px rgba(255,107,53,0.22); }
+    .tier-card[data-tier="max"].active .tier-dot  { background: #ff6b35; box-shadow: 0 0 14px #ff6b35; }
+    .tier-card[data-tier="max"].active .tier-name { color: #ff6b35; }
+
+    @keyframes tierPop {
+      0%   { transform: scale(0.96); }
+      55%  { transform: scale(1.04); }
+      100% { transform: scale(1); }
+    }
+    .tier-card.tier-popping { animation: tierPop 0.32s ease; }
+
+    /* Durability badges */
+    .d-badge { cursor: pointer; }
+    @keyframes badgeBounce {
+      0%,100% { transform: scale(1)   translateY(0); }
+      30%     { transform: scale(1.2) translateY(-5px); }
+      65%     { transform: scale(0.92) translateY(1px); }
+      82%     { transform: scale(1.05) translateY(-2px); }
+    }
+    .d-badge.bouncing { animation: badgeBounce 0.48s ease; }
+    .d-badge.bouncing { box-shadow: 0 0 22px rgba(0,212,170,0.5) !important; }
+
+    /* Value card click flash */
+    @keyframes cardFlash {
+      0%   { box-shadow: none; border-color: var(--border); }
+      45%  { box-shadow: 0 0 0 2px var(--teal), 0 8px 40px rgba(0,212,170,0.28); border-color: var(--teal); }
+      100% { box-shadow: none; border-color: var(--border); }
+    }
+    .value-card { cursor: pointer; }
+    .value-card.card-flashing { animation: cardFlash 0.6s ease forwards; }
+
+    /* Testimonial 3D tilt */
+    .testimonial-card { transform-style: preserve-3d; will-change: transform; }
+
+    /* Shop button success pulse */
+    @keyframes btnConfirm {
+      0%   { transform: scale(1); }
+      35%  { transform: scale(0.92); }
+      65%  { transform: scale(1.07); }
+      100% { transform: scale(1); }
+    }
+    .btn.btn-confirming { animation: btnConfirm 0.38s ease; }
+
+    /* Nav link click flash */
+    @keyframes navFlash {
+      0%,100% { color: rgba(255,255,255,0.72); }
+      40%     { color: var(--teal); text-shadow: 0 0 10px var(--teal); }
+    }
+    .nav-links a.link-flashing { animation: navFlash 0.42s ease; }
+
+    /* Magnetic buttons — smooth reset */
+    .btn { transition: transform 0.18s ease, background 0.25s, border-color 0.25s, box-shadow 0.25s, color 0.25s; }
+
+    /* Hero stat chips interactive */
+    .hero-stat-chip { cursor: pointer; }
+    @keyframes chipPing {
+      0%   { box-shadow: 0 0 0 0 rgba(0,212,170,0.55); }
+      70%  { box-shadow: 0 0 0 10px rgba(0,212,170,0); }
+      100% { box-shadow: none; }
+    }
+    .hero-stat-chip.pinging { animation: chipPing 0.55s ease; }
+
   </style>
 </head>
 <body>
@@ -2416,19 +2512,19 @@
         <h3 class="section-headline" style="font-size:2rem">Choose Your Protection Level</h3>
       </div>
       <div class="tiers-grid">
-        <div class="tier-card reveal" onclick="selectTier(this)">
+        <div class="tier-card reveal" data-tier="light" onclick="selectTier(this)">
           <div class="tier-dot"></div>
           <div class="tier-name">LIGHT</div>
           <div class="tier-sub">Recovery</div>
           <p class="tier-desc">Minimal compression, gentle patellar support. Ideal for everyday wear, warm-ups, and post-injury recovery sessions.</p>
         </div>
-        <div class="tier-card active reveal" style="transition-delay:0.1s" onclick="selectTier(this)">
+        <div class="tier-card active reveal" data-tier="medium" style="transition-delay:0.1s" onclick="selectTier(this)">
           <div class="tier-dot"></div>
           <div class="tier-name">MEDIUM</div>
           <div class="tier-sub">Training</div>
           <p class="tier-desc">Moderate stabilization with full chip tracking. The everyday workhorse — built for practice, film sessions, and skill work.</p>
         </div>
-        <div class="tier-card reveal" style="transition-delay:0.2s" onclick="selectTier(this)">
+        <div class="tier-card reveal" data-tier="max" style="transition-delay:0.2s" onclick="selectTier(this)">
           <div class="tier-dot"></div>
           <div class="tier-name">MAX</div>
           <div class="tier-sub">Competition</div>
@@ -3041,13 +3137,13 @@
 
       // [id, explodedTx, explodedTy, explodedRot]
       const comps = [
-        ['el-shell',   -340, -250, -13],
-        ['el-padding',  325, -265,  15],
-        ['el-stab-l',  -370,   30,  -7],
-        ['el-stab-r',   370,   30,   7],
-        ['el-strap',   -280,  255, -10],
-        ['el-chip',     268,  255,  12],
-        ['el-lining',     0,  155,   0],
+        ['el-shell',   -400, -295, -13],
+        ['el-padding',  390, -310,  15],
+        ['el-stab-l',  -445,   35,  -7],
+        ['el-stab-r',   445,   35,   7],
+        ['el-strap',   -340,  305, -10],
+        ['el-chip',     325,  305,  12],
+        ['el-lining',     0,  200,   0],
       ];
 
       function eio(t) { return t < 0.5 ? 2*t*t : -1+(4-2*t)*t; }
@@ -3057,7 +3153,7 @@
       let scrollProg = 0;
       function applyExplode(p) {
         const e = eio(Math.max(0, Math.min(1, p)));
-        const s = isMob() ? 0.46 : 1;
+        const s = isMob() ? 0.40 : 1;
         comps.forEach(([id, tx, ty, rot]) => {
           const el = document.getElementById(id);
           if (!el) return;
@@ -3240,14 +3336,152 @@
       }, { threshold: 0.45 }).observe(mockup);
     })();
 
-    /* ---- Tier card exclusive selection ---- */
+    /* ---- Tier card exclusive selection (enhanced) ---- */
     function selectTier(card) {
       document.querySelectorAll('.tier-card').forEach(c => {
-        const isThis = c === card;
-        c.classList.toggle('active', isThis);
-        c.classList.toggle('dimmed', !isThis);
+        c.classList.toggle('active',  c === card);
+        c.classList.toggle('dimmed', c !== card);
       });
+      card.classList.remove('tier-popping');
+      void card.offsetWidth;
+      card.classList.add('tier-popping');
+      card.addEventListener('animationend', () => card.classList.remove('tier-popping'), { once: true });
     }
+
+    /* ====================================================
+       INTERACTIVE ENHANCEMENTS
+    ==================================================== */
+    (function () {
+
+      /* 1. Ambient cursor glow ----------------------- */
+      const glow = document.createElement('div');
+      glow.id = 'cursor-glow';
+      document.body.appendChild(glow);
+      document.addEventListener('mousemove', e => {
+        glow.style.left    = e.clientX + 'px';
+        glow.style.top     = e.clientY + 'px';
+        glow.style.opacity = '1';
+      });
+      document.addEventListener('mouseleave', () => { glow.style.opacity = '0'; });
+
+      /* 2. Ripple on every button -------------------- */
+      document.querySelectorAll('.btn').forEach(btn => {
+        btn.addEventListener('click', e => {
+          const r    = document.createElement('span');
+          r.className = 'btn-ripple';
+          const rect = btn.getBoundingClientRect();
+          const sz   = Math.max(rect.width, rect.height) * 2.2;
+          r.style.cssText = [
+            `width:${sz}px`, `height:${sz}px`,
+            `left:${e.clientX - rect.left - sz / 2}px`,
+            `top:${e.clientY - rect.top  - sz / 2}px`,
+            'position:absolute'
+          ].join(';');
+          btn.appendChild(r);
+          r.addEventListener('animationend', () => r.remove());
+        });
+      });
+
+      /* 3. Magnetic hover on hero CTA buttons -------- */
+      document.querySelectorAll('.hero .btn').forEach(btn => {
+        btn.addEventListener('mousemove', e => {
+          const rect = btn.getBoundingClientRect();
+          const x = (e.clientX - rect.left - rect.width  / 2) * 0.28;
+          const y = (e.clientY - rect.top  - rect.height / 2) * 0.28;
+          btn.style.transform = `translate(${x}px,${y}px)`;
+        });
+        btn.addEventListener('mouseleave', () => { btn.style.transform = ''; });
+      });
+
+      /* 4. Nav link click flash ---------------------- */
+      document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', () => {
+          link.classList.remove('link-flashing');
+          void link.offsetWidth;
+          link.classList.add('link-flashing');
+          link.addEventListener('animationend', () => link.classList.remove('link-flashing'), { once: true });
+        });
+      });
+
+      /* 5. Value cards — teal ring flash on click ---- */
+      document.querySelectorAll('.value-card').forEach(card => {
+        card.addEventListener('click', () => {
+          card.classList.remove('card-flashing');
+          void card.offsetWidth;
+          card.classList.add('card-flashing');
+          card.addEventListener('animationend', () => card.classList.remove('card-flashing'), { once: true });
+        });
+      });
+
+      /* 6. Durability badges — bounce + glow on click */
+      document.querySelectorAll('.d-badge').forEach(badge => {
+        badge.addEventListener('click', () => {
+          badge.classList.remove('bouncing');
+          void badge.offsetWidth;
+          badge.classList.add('bouncing');
+          badge.addEventListener('animationend', () => badge.classList.remove('bouncing'), { once: true });
+        });
+      });
+
+      /* 7. Testimonial 3-D tilt on hover ------------- */
+      document.querySelectorAll('.testimonial-card').forEach(card => {
+        card.addEventListener('mousemove', e => {
+          const rect = card.getBoundingClientRect();
+          const x = ((e.clientX - rect.left) / rect.width  - 0.5) * 12;
+          const y = ((e.clientY - rect.top)  / rect.height - 0.5) * 12;
+          card.style.transform = `perspective(750px) rotateY(${x}deg) rotateX(${-y}deg) translateY(-5px)`;
+          card.style.transition = 'transform 0.08s ease';
+        });
+        card.addEventListener('mouseleave', () => {
+          card.style.transition = 'transform 0.4s ease';
+          card.style.transform  = '';
+        });
+      });
+
+      /* 8. Shop "Shop Now" — confirm pulse + label swap */
+      document.querySelectorAll('.shop-card .btn-teal').forEach(btn => {
+        btn.addEventListener('click', () => {
+          if (btn._confirming) return;
+          btn._confirming = true;
+          const orig = btn.textContent;
+          btn.classList.add('btn-confirming');
+          btn.textContent = '✓ Joining Waitlist…';
+          btn.style.background = '#009e80';
+          setTimeout(() => {
+            btn.textContent    = orig;
+            btn.style.background = '';
+            btn._confirming    = false;
+            btn.classList.remove('btn-confirming');
+          }, 2000);
+        });
+      });
+
+      /* 9. Hero stat chips — ping on click ----------- */
+      document.querySelectorAll('.hero-stat-chip').forEach(chip => {
+        chip.addEventListener('click', () => {
+          chip.classList.remove('pinging');
+          void chip.offsetWidth;
+          chip.classList.add('pinging');
+          chip.addEventListener('animationend', () => chip.classList.remove('pinging'), { once: true });
+        });
+      });
+
+      /* 10. Scroll-spy highlight active nav link ------ */
+      const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
+      const sections = Array.from(navLinks).map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+      const spy = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          const id = entry.target.id;
+          navLinks.forEach(a => {
+            const active = a.getAttribute('href') === '#' + id;
+            a.style.color = active ? 'var(--teal)' : '';
+          });
+        });
+      }, { rootMargin: '-40% 0px -55% 0px' });
+      sections.forEach(s => spy.observe(s));
+
+    })();
   </script>
 
 </body>
