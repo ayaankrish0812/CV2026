@@ -1306,18 +1306,41 @@
       line-height: 1.75;
       font-style: italic;
     }
-    .quote-author { display: flex; align-items: center; gap: 14px; }
+    .testimonial-stars {
+      color: var(--teal);
+      font-size: 0.78rem;
+      letter-spacing: 3px;
+      margin-bottom: 16px;
+      opacity: 0.9;
+    }
+    .quote-author { display: flex; align-items: flex-start; gap: 14px; }
     .author-avatar {
-      width: 44px; height: 44px;
+      width: 48px; height: 48px;
       border-radius: 50%;
       background: linear-gradient(135deg, var(--teal), #006655);
       display: flex; align-items: center; justify-content: center;
       font-weight: 700;
-      font-size: 0.85rem;
+      font-size: 0.88rem;
       flex-shrink: 0;
+      border: 2px solid rgba(255,255,255,0.08);
     }
-    .author-name { font-weight: 700; font-size: 0.9rem; display: block; margin-bottom: 2px; }
-    .author-role { font-size: 0.78rem; color: var(--muted); }
+    .author-name { font-weight: 700; font-size: 0.92rem; display: block; margin-bottom: 3px; }
+    .author-role { font-size: 0.74rem; color: var(--muted); display: block; line-height: 1.45; }
+    .author-credential {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.63rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--teal);
+      background: var(--teal-dim);
+      border: 1px solid var(--teal-border);
+      border-radius: 6px;
+      padding: 3px 8px;
+      margin-top: 6px;
+    }
 
     /* ============================================================
        10. SHOP
@@ -1921,10 +1944,6 @@
           <img src="https://images.unsplash.com/photo-1599058917212-d750089bc07e?auto=format&fit=crop&w=800&q=80"
                alt="Athlete in action"
                onerror="this.src='https://images.unsplash.com/photo-1547241428-ee379e8e6b2a?auto=format&fit=crop&w=800&q=80'; this.onerror=function(){this.style.display='none';}" />
-          <div class="athlete-slot-placeholder">
-            <div class="slot-icon-lg">🏐</div>
-            <div class="slot-label">Add athlete photo here</div>
-          </div>
         </div>
         <div class="hero-stat-chip">
           <div>
@@ -2600,9 +2619,9 @@
 
         <!-- Tall card -->
         <div class="athlete-card athlete-card-tall reveal">
-          <img src="https://images.unsplash.com/photo-1551698618-1dfe5d97d256?auto=format&fit=crop&w=600&q=80"
+          <img src="https://images.unsplash.com/photo-1552674605-db6ffd4facb5?auto=format&fit=crop&w=600&q=80"
                alt="Volleyball player in action"
-               onerror="this.src='https://images.unsplash.com/photo-1552674605-db6ffd4facb5?auto=format&fit=crop&w=600&q=80'; this.onerror=function(){this.style.display='none';}" />
+               onerror="this.src='https://images.unsplash.com/photo-1504507926084-34cf0b939964?auto=format&fit=crop&w=600&q=80'; this.onerror=function(){this.style.display='none';}" />
           <div class="athlete-placeholder">
             <div class="athlete-placeholder-icon">🏐</div>
             <div class="athlete-placeholder-text">Volleyball</div>
@@ -2616,8 +2635,8 @@
         <!-- Right column — two stacked -->
         <div style="display:flex;flex-direction:column;gap:16px;">
           <div class="athlete-card athlete-card-sq reveal" style="transition-delay:0.1s">
-            <img src="https://images.unsplash.com/photo-1546519638405-a2f9ce4b8a5a?auto=format&fit=crop&w=600&q=80"
-                 alt="Basketball player jumping"
+            <img src="https://images.unsplash.com/photo-1519861531473-9200262188bf?auto=format&fit=crop&w=600&q=80"
+                 alt="Basketball player in action"
                  onerror="this.src='https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=600&q=80'; this.onerror=function(){this.style.display='none';}" />
             <div class="athlete-placeholder">
               <div class="athlete-placeholder-icon">🏀</div>
@@ -2688,49 +2707,62 @@
   <section class="testimonials" id="testimonials">
     <div class="container">
       <div class="section-header-center reveal">
-        <div class="section-label" style="justify-content:center">Social Proof</div>
-        <h2 class="section-headline">What Athletes Are Saying</h2>
+        <div class="section-label" style="justify-content:center">Trusted By</div>
+        <h2 class="section-headline">Athletes. Coaches. Doctors.</h2>
       </div>
       <div class="testimonials-grid">
+
+        <!-- Youth athlete -->
         <div class="testimonial-card reveal" style="transition-delay:0s">
           <div>
+            <div class="testimonial-stars">★★★★★</div>
             <div class="quote-mark">"</div>
-            <p class="quote-text">I've dealt with jumper's knee since I was 14. Tendon X is the first product that actually made a difference during play — not just in PT. My knees feel supported even after a two-hour practice. I don't want to play without it.</p>
+            <p class="quote-text">I've had patellar tendonitis for two seasons — my trainer kept telling me to sit out. Since I started wearing Tendon X, my knee feels locked in even after back-to-back AAU games. The app showed me exactly what was spiking my load, and I actually fixed it. Playing my best ball right now.</p>
           </div>
           <div class="quote-author">
-            <div class="author-avatar">MR</div>
+            <div class="author-avatar" style="background:linear-gradient(135deg,#00d4aa,#006655)">MD</div>
             <div>
-              <span class="author-name">Maya R.</span>
-              <span class="author-role">Club Volleyball Player, 16 · Orlando, FL</span>
+              <span class="author-name">Marcus Davis</span>
+              <span class="author-role">AAU Basketball Guard, 17<br>Los Angeles, CA</span>
+              <span class="author-credential">⚡ Student Athlete</span>
             </div>
           </div>
         </div>
+
+        <!-- Coach Torino Johnson -->
         <div class="testimonial-card reveal" style="transition-delay:0.1s">
           <div>
+            <div class="testimonial-stars">★★★★★</div>
             <div class="quote-mark">"</div>
-            <p class="quote-text">As a coach, I'm always watching for overuse signs. The data the Tendon X app gives me is something I've never had access to before. I can see when a player is approaching their load limit before they feel it. The AI Doctor feature is genuinely next level.</p>
+            <p class="quote-text">Managing knee load across a full tournament stretch is one of the hardest things in women's basketball. Tendon X changed how I do it. The real-time data tells me when a player is pushing past safe limits before she even feels it. That's the difference between a productive season and an injury report.</p>
           </div>
           <div class="quote-author">
-            <div class="author-avatar">JT</div>
+            <div class="author-avatar" style="background:linear-gradient(135deg,#f5a623,#c07800)">TJ</div>
             <div>
-              <span class="author-name">Coach James T.</span>
-              <span class="author-role">Head Coach · Elite Volleyball Club</span>
+              <span class="author-name">Torino Johnson</span>
+              <span class="author-role">Head Coach, Women's Basketball<br>Cal State LA</span>
+              <span class="author-credential">🏀 Verified Coach</span>
             </div>
           </div>
         </div>
+
+        <!-- Dr. D Anand -->
         <div class="testimonial-card reveal" style="transition-delay:0.2s">
           <div>
+            <div class="testimonial-stars">★★★★★</div>
             <div class="quote-mark">"</div>
-            <p class="quote-text">From a sports medicine standpoint, most knee pads offer zero clinical value. Tendon X is different — the patellar strap mechanics are sound, and the load data is exactly what we use in rehabilitation planning. I recommend it to every returning athlete.</p>
+            <p class="quote-text">Most knee supports on the market offer zero clinical value. Tendon X is a genuine exception. The patellar strap is anatomically positioned correctly, the load-sensing data is clinically relevant, and the AI guidance aligns with real rehab protocols. I've started recommending it to patients returning from patellar tendinopathy.</p>
           </div>
           <div class="quote-author">
-            <div class="author-avatar">SN</div>
+            <div class="author-avatar" style="background:linear-gradient(135deg,#7b61ff,#4a38c2)">DA</div>
             <div>
-              <span class="author-name">Dr. Sarah N.</span>
-              <span class="author-role">Sports Medicine &amp; Physical Therapist</span>
+              <span class="author-name">Dr. D Anand</span>
+              <span class="author-role">Sports Medicine Physician<br>Board Certified, Orthopedics</span>
+              <span class="author-credential">🩺 Medical Professional</span>
             </div>
           </div>
         </div>
+
       </div>
     </div>
   </section>
@@ -2754,7 +2786,7 @@
           <p>Rounded pad for floor play, digs, and lateral movement. Full patellar strap, lateral stabilizers, and smart chip pocket included.</p>
           <div class="shop-price">
             $89.99
-            <span class="shop-price-sub">Sleeve + smart chip + free app included</span>
+            <span class="shop-price-sub">2 Sleeves + smart chip + free app included</span>
           </div>
           <button class="btn btn-teal" onclick="openModal()">Shop Now</button>
         </div>
@@ -2766,7 +2798,7 @@
           <p>Long sleeve, low-profile pad built for court sessions. Full patellar strap, medial/lateral stabilizers, and smart chip included. Invisible under shorts.</p>
           <div class="shop-price">
             $89.99
-            <span class="shop-price-sub">Sleeve + smart chip + free app included</span>
+            <span class="shop-price-sub">2 Sleeves + smart chip + free app included</span>
           </div>
           <button class="btn btn-teal" onclick="openModal()">Shop Now</button>
         </div>
