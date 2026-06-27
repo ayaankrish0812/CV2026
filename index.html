@@ -47,11 +47,10 @@
 
     section { position: relative; }
 
-    img { display: block; max-width: 100%; }
+    img { display: block; max-width: 100%; height: 100%; object-fit: cover; }
     a   { text-decoration: none; color: inherit; }
     ul  { list-style: none; }
 
-    /* Bebas Neue for all headings */
     h1, h2, h3, .nav-brand, .hero-wordmark, .section-headline {
       font-family: 'Bebas Neue', sans-serif;
       letter-spacing: 0.04em;
@@ -64,7 +63,7 @@
     }
 
     /* ============================================================
-       SCROLL ANIMATION — elements start hidden, fade in on entry
+       SCROLL ANIMATION
     ============================================================ */
     .reveal {
       opacity: 0;
@@ -123,8 +122,8 @@
       border-color: var(--teal);
     }
     .btn-sm { padding: 11px 24px; font-size: 0.8rem; }
+    .btn-full-w { width: 100%; }
 
-    /* Section labels */
     .section-label {
       display: inline-flex;
       align-items: center;
@@ -271,7 +270,6 @@
         linear-gradient(160deg, #0a0a0a 0%, #0d1a1a 50%, #0a0a0a 100%);
       will-change: transform;
     }
-    /* Subtle grid */
     .hero-bg::after {
       content: '';
       position: absolute;
@@ -284,13 +282,19 @@
     .hero-overlay {
       position: absolute;
       inset: 0;
-      background: linear-gradient(to right, rgba(10,10,10,0.95) 45%, rgba(10,10,10,0.4) 100%);
+      background: linear-gradient(to right, rgba(10,10,10,0.95) 40%, rgba(10,10,10,0.2) 100%);
     }
-    .hero-content {
+    .hero-inner {
       position: relative;
       z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 48px;
       padding: 80px 0;
+      width: 100%;
     }
+    .hero-content { flex: 1; max-width: 580px; }
     .hero-tag {
       display: inline-flex;
       align-items: center;
@@ -323,11 +327,92 @@
     .hero-sub {
       font-size: 1.05rem;
       color: var(--muted);
-      max-width: 520px;
+      max-width: 480px;
       line-height: 1.75;
       margin-bottom: 44px;
     }
     .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+
+    /* Hero right — athlete image slot */
+    .hero-visual {
+      flex-shrink: 0;
+      width: 420px;
+      position: relative;
+    }
+    .athlete-img-slot {
+      width: 100%;
+      aspect-ratio: 3/4;
+      background: linear-gradient(160deg, #141414 0%, #0d1a1a 100%);
+      border: 1px solid var(--teal-border);
+      border-radius: 24px;
+      overflow: hidden;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .athlete-img-slot img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .athlete-slot-placeholder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      z-index: 1;
+      pointer-events: none;
+    }
+    .slot-icon-lg {
+      width: 56px; height: 56px;
+      border-radius: 14px;
+      background: var(--teal-dim);
+      border: 1px solid var(--teal-border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.6rem;
+    }
+    .slot-label {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-align: center;
+    }
+    /* Floating stat chips on hero image */
+    .hero-stat-chip {
+      position: absolute;
+      background: rgba(10,10,10,0.85);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--teal-border);
+      border-radius: 50px;
+      padding: 10px 18px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      z-index: 2;
+    }
+    .hero-stat-chip:nth-of-type(1) { bottom: 28px; left: -20px; }
+    .hero-stat-chip:nth-of-type(2) { top: 28px; right: -20px; }
+    .chip-val {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.2rem;
+      color: var(--teal);
+      letter-spacing: 0.04em;
+      line-height: 1;
+    }
+    .chip-key {
+      font-size: 0.68rem;
+      font-weight: 600;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      line-height: 1.2;
+    }
+
     .hero-scroll {
       position: absolute;
       bottom: 36px;
@@ -352,43 +437,6 @@
     @keyframes scrollPulse {
       0%, 100% { opacity: 0.3; }
       50% { opacity: 1; }
-    }
-    /* Right-side decorative element */
-    .hero-deco {
-      position: absolute;
-      right: 0;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 45%;
-      height: 100%;
-      z-index: 1;
-      pointer-events: none;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .deco-ring {
-      position: absolute;
-      border-radius: 50%;
-      border: 1px solid var(--teal-border);
-    }
-    .deco-ring-1 { width: 400px; height: 400px; animation: rotate 20s linear infinite; }
-    .deco-ring-2 { width: 280px; height: 280px; border-color: rgba(0,212,170,0.1); animation: rotate 14s linear infinite reverse; }
-    .deco-ring-3 { width: 160px; height: 160px; border-color: rgba(0,212,170,0.15); }
-    .deco-center {
-      width: 80px; height: 80px;
-      border-radius: 50%;
-      background: var(--teal-dim);
-      border: 1px solid var(--teal);
-      display: flex; align-items: center; justify-content: center;
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 1rem;
-      color: var(--teal);
-      letter-spacing: 0.1em;
-    }
-    @keyframes rotate {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
     }
 
     /* ============================================================
@@ -498,7 +546,6 @@
     }
     .value-card p { font-size: 0.82rem; color: var(--muted); line-height: 1.6; }
 
-    /* Feature blocks alternating */
     .feature-blocks { display: flex; flex-direction: column; gap: 0; }
     .feature-block {
       display: grid;
@@ -543,7 +590,6 @@
     }
     .feature-content p { font-size: 0.92rem; color: var(--muted); line-height: 1.75; }
 
-    /* CSS product visual elements */
     .product-art {
       display: flex;
       align-items: center;
@@ -666,7 +712,6 @@
       flex-shrink: 0;
     }
 
-    /* Customization tiers */
     .tiers-label { text-align: center; margin-bottom: 28px; }
     .tiers-grid {
       display: grid;
@@ -726,7 +771,6 @@
       align-items: center;
     }
 
-    /* App mockup */
     .app-mockup {
       background: #0d0f0e;
       border: 1px solid rgba(0,212,170,0.2);
@@ -772,7 +816,6 @@
       margin-bottom: 16px;
     }
 
-    /* Gauge */
     .gauge-wrap {
       display: flex;
       align-items: center;
@@ -854,7 +897,6 @@
       font-weight: 500;
     }
 
-    /* Load bar */
     .load-bar-wrap {
       background: rgba(255,255,255,0.03);
       border: 1px solid var(--border);
@@ -883,7 +925,6 @@
       border-radius: 3px;
     }
 
-    /* Tech right col */
     .tech-content .section-headline { margin-bottom: 20px; }
     .tech-content p { color: var(--muted); line-height: 1.8; font-size: 0.95rem; margin-bottom: 32px; }
     .tech-bullets { display: flex; flex-direction: column; gap: 16px; margin-bottom: 32px; }
@@ -915,7 +956,276 @@
     .chip-callout strong { color: var(--teal); }
 
     /* ============================================================
-       6. BUILT TO LAST
+       6. THE TENDON X APP
+    ============================================================ */
+    .app-section {
+      padding: 100px 0;
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+    }
+    .app-plans {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 48px;
+    }
+    .app-plan {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 40px 36px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      transition: all 0.25s;
+    }
+    .app-plan:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(0,0,0,0.4); }
+    .pro-plan {
+      border-color: var(--teal-border);
+      box-shadow: 0 0 0 1px var(--teal-border), 0 20px 60px rgba(0,212,170,0.07);
+    }
+    .plan-badge {
+      display: inline-block;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 50px;
+      width: fit-content;
+    }
+    .free-badge {
+      background: rgba(255,255,255,0.07);
+      color: var(--muted);
+      border: 1px solid var(--border);
+    }
+    .pro-badge {
+      background: var(--teal-dim);
+      color: var(--teal);
+      border: 1px solid var(--teal-border);
+    }
+    .plan-popular {
+      position: absolute;
+      top: 20px; right: 20px;
+      font-size: 0.6rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #000;
+      background: var(--teal);
+      padding: 4px 10px;
+      border-radius: 50px;
+    }
+    .app-plan h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2rem;
+      letter-spacing: 0.04em;
+      margin: 0;
+    }
+    .plan-price {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 3rem;
+      color: var(--teal);
+      letter-spacing: 0.03em;
+      line-height: 1;
+    }
+    .plan-price span {
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem;
+      font-weight: 400;
+      color: var(--muted);
+    }
+    .plan-sub {
+      color: var(--muted);
+      font-size: 0.88rem;
+      line-height: 1.6;
+      margin: 0;
+    }
+    .plan-features {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      flex: 1;
+    }
+    .plan-features li {
+      font-size: 0.88rem;
+      color: var(--muted);
+      padding-left: 22px;
+      position: relative;
+      line-height: 1.5;
+    }
+    .plan-features li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: var(--teal);
+      font-weight: 700;
+    }
+    .plan-features li.feature-hi { color: var(--white); }
+
+    /* AI Doctor callout */
+    .ai-doctor-callout {
+      background: var(--bg-surface);
+      border: 1px solid var(--teal-border);
+      border-radius: var(--radius);
+      padding: 48px;
+      display: grid;
+      grid-template-columns: auto 1fr 1.3fr;
+      gap: 48px;
+      align-items: start;
+    }
+    .ai-doctor-icon {
+      width: 64px; height: 64px;
+      background: var(--teal-dim);
+      border: 1px solid var(--teal-border);
+      border-radius: 18px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2rem;
+      flex-shrink: 0;
+    }
+    .ai-doctor-text h4 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.8rem;
+      letter-spacing: 0.04em;
+      margin-bottom: 12px;
+    }
+    .ai-doctor-text p {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+    .ai-message {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+    .ai-avatar {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: var(--teal);
+      color: #000;
+      font-size: 0.65rem;
+      font-weight: 800;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      letter-spacing: 0.04em;
+    }
+    .ai-bubble {
+      background: var(--bg-card);
+      border: 1px solid var(--teal-border);
+      border-radius: 0 14px 14px 14px;
+      padding: 16px 18px;
+    }
+    .ai-bubble p {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.85);
+      line-height: 1.75;
+      font-style: italic;
+      margin-bottom: 10px;
+    }
+    .ai-tag {
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--teal);
+    }
+    .app-download-note {
+      text-align: center;
+      margin-top: 32px;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+    .app-download-note strong { color: var(--white); }
+
+    /* ============================================================
+       7. ATHLETES IN ACTION
+    ============================================================ */
+    .athletes {
+      padding: 100px 0;
+      background: var(--bg-surface);
+      border-top: 1px solid var(--border);
+    }
+    .athletes-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr;
+      gap: 16px;
+    }
+    .athlete-card {
+      position: relative;
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: linear-gradient(160deg, #141414, #0d1a1a);
+      border: 1px solid var(--border);
+      transition: all 0.25s;
+    }
+    .athlete-card:hover {
+      border-color: var(--teal-border);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    }
+    .athlete-card-tall { aspect-ratio: 2/3; }
+    .athlete-card-sq   { aspect-ratio: 1/1; }
+    .athlete-card img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .athlete-card-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 50%);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 24px;
+    }
+    .athlete-card-label {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.3rem;
+      letter-spacing: 0.06em;
+      margin-bottom: 4px;
+    }
+    .athlete-card-sport {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--teal);
+    }
+    /* placeholder for when no image is loaded */
+    .athlete-placeholder {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      z-index: 0;
+    }
+    .athlete-placeholder-icon {
+      width: 48px; height: 48px;
+      border-radius: 12px;
+      background: var(--teal-dim);
+      border: 1px solid var(--teal-border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem;
+    }
+    .athlete-placeholder-text {
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ============================================================
+       8. BUILT TO LAST
     ============================================================ */
     .durability {
       padding: 80px 0;
@@ -949,14 +1259,9 @@
       transform: translateY(-2px);
     }
     .d-badge-icon { font-size: 1.1rem; }
-    .durability-sub {
-      color: var(--muted);
-      margin-top: 16px;
-      font-size: 0.9rem;
-    }
 
     /* ============================================================
-       7. TESTIMONIALS
+       9. TESTIMONIALS
     ============================================================ */
     .testimonials {
       padding: 100px 0;
@@ -1012,7 +1317,7 @@
     .author-role { font-size: 0.78rem; color: var(--muted); }
 
     /* ============================================================
-       8. SHOP
+       10. SHOP
     ============================================================ */
     .shop {
       padding: 100px 0;
@@ -1049,10 +1354,25 @@
       padding: 4px 40px;
       transform: rotate(45deg);
     }
+    .shop-card.coming-card { opacity: 0.72; }
     .shop-card:hover {
       border-color: var(--teal-border);
       transform: translateY(-4px);
       box-shadow: 0 16px 48px rgba(0,0,0,0.4);
+    }
+    .shop-coming-tag {
+      display: inline-block;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      padding: 4px 12px;
+      border-radius: 50px;
+      margin-bottom: 16px;
+      width: fit-content;
     }
     .shop-icon { font-size: 2.5rem; margin-bottom: 20px; }
     .shop-card h3 {
@@ -1064,13 +1384,60 @@
     .shop-card p { font-size: 0.85rem; color: var(--muted); line-height: 1.6; margin-bottom: 24px; flex: 1; }
     .shop-price {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: 2.2rem;
+      font-size: 2.6rem;
       color: var(--teal);
       letter-spacing: 0.03em;
       margin-bottom: 20px;
+      line-height: 1;
+    }
+    .shop-price-sub {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 400;
+      color: var(--muted);
+      display: block;
+      margin-top: 2px;
     }
 
-    /* Email signup */
+    /* Coming soon products strip */
+    .coming-strip {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 32px 40px;
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      margin-bottom: 56px;
+      flex-wrap: wrap;
+    }
+    .coming-strip-label {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.1rem;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      flex-shrink: 0;
+    }
+    .coming-strip-items {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      flex: 1;
+    }
+    .coming-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 50px;
+      padding: 8px 16px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--muted);
+    }
+    .coming-item span { font-size: 1rem; }
+
     .shop-signup {
       background: var(--bg-surface);
       border: 1px solid var(--border);
@@ -1117,7 +1484,7 @@
     .signup-success.show { display: block; }
 
     /* ============================================================
-       MODAL — Coming Soon
+       MODAL
     ============================================================ */
     .modal-overlay {
       display: none;
@@ -1183,7 +1550,7 @@
     .modal-success.show { display: block; }
 
     /* ============================================================
-       9. FOOTER
+       11. FOOTER
     ============================================================ */
     .footer {
       background: #050505;
@@ -1256,22 +1623,34 @@
     }
 
     /* ============================================================
-       ANIMATIONS / UTILITIES
+       ANIMATIONS
     ============================================================ */
     @keyframes blink {
       0%, 100% { opacity: 1; }
       50% { opacity: 0.2; }
+    }
+    @keyframes rotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
     }
 
     /* ============================================================
        RESPONSIVE
     ============================================================ */
     @media (max-width: 1024px) {
+      .hero-visual { display: none; }
       .problem-inner { grid-template-columns: 1fr; gap: 56px; }
       .tech-inner    { grid-template-columns: 1fr; }
       .feature-block { grid-template-columns: 1fr; }
       .feature-visual { border-left: none !important; border-right: none !important; border-top: 1px solid var(--border); }
       .feature-block.reverse { direction: ltr; }
+      .ai-doctor-callout { grid-template-columns: 1fr; gap: 28px; }
+      .athletes-grid { grid-template-columns: 1fr 1fr; }
+      .athletes-grid .athlete-card:last-child { grid-column: 1 / -1; aspect-ratio: 16/7; }
       .footer-inner  { grid-template-columns: 1fr; gap: 40px; }
     }
 
@@ -1279,27 +1658,30 @@
       .nav-links { display: none; }
       .nav-cta   { display: none; }
       .hamburger { display: flex; }
-      .hero-deco { display: none; }
-      .hero h1   { font-size: 4.5rem; }
       .value-cards { grid-template-columns: repeat(2, 1fr); }
       .sport-versions { grid-template-columns: 1fr; }
       .tiers-grid { grid-template-columns: 1fr; }
+      .app-plans { grid-template-columns: 1fr; }
       .testimonials-grid { grid-template-columns: 1fr; }
       .shop-cards { grid-template-columns: 1fr; }
       .stats-grid { grid-template-columns: 1fr 1fr; }
       .footer-links { grid-template-columns: repeat(2, 1fr); }
       .feature-content { padding: 36px 28px; }
       .durability-badges { gap: 10px; }
+      .athletes-grid { grid-template-columns: 1fr; }
+      .athlete-card-tall { aspect-ratio: 4/3; }
+      .coming-strip { flex-direction: column; align-items: flex-start; gap: 16px; }
     }
 
     @media (max-width: 480px) {
-      .hero h1 { font-size: 3.4rem; }
+      .hero-wordmark { font-size: 4.5rem; }
       .hero-actions { flex-direction: column; }
       .hero-actions .btn { width: 100%; }
       .value-cards { grid-template-columns: 1fr; }
       .metrics-mini { grid-template-columns: repeat(3, 1fr); }
       .d-badge { font-size: 0.78rem; padding: 12px 18px; }
       .shop-signup { padding: 32px 20px; }
+      .ai-doctor-callout { padding: 28px 24px; }
     }
   </style>
 </head>
@@ -1316,10 +1698,11 @@
           <li><a href="#problem">The Problem</a></li>
           <li><a href="#solution">Solution</a></li>
           <li><a href="#tech">Technology</a></li>
+          <li><a href="#app">The App</a></li>
           <li><a href="#shop">Shop</a></li>
         </ul>
       </nav>
-      <a href="#shop" class="btn btn-teal nav-cta">Shop Now</a>
+      <a href="#shop" class="btn btn-teal nav-cta">Shop Now — $75</a>
       <button class="hamburger" id="hamburger" aria-label="Toggle menu" onclick="toggleNav()">
         <span></span><span></span><span></span>
       </button>
@@ -1330,9 +1713,10 @@
         <li><a href="#solution" onclick="closeNav()">Solution</a></li>
         <li><a href="#sport" onclick="closeNav()">For Your Sport</a></li>
         <li><a href="#tech" onclick="closeNav()">Technology</a></li>
+        <li><a href="#app" onclick="closeNav()">The App</a></li>
         <li><a href="#shop" onclick="closeNav()">Shop</a></li>
       </ul>
-      <a href="#shop" class="btn btn-teal" onclick="closeNav()">Shop Now</a>
+      <a href="#shop" class="btn btn-teal" onclick="closeNav()">Shop Now — $75</a>
     </div>
   </header>
 
@@ -1342,21 +1726,47 @@
   <section class="hero" id="home">
     <div class="hero-bg" id="parallaxBg"></div>
     <div class="hero-overlay"></div>
-    <div class="container hero-content">
-      <div class="hero-tag">New Technology · 2026 Release</div>
-      <h1 class="hero-wordmark">TENDON<span style="color:var(--teal)">X</span></h1>
-      <p class="hero-tagline">PROTECT. PREVENT. PERFORM.</p>
-      <p class="hero-sub">The first customizable knee sleeve with integrated patellar support, stabilization, and impact tracking — built for every move.</p>
-      <div class="hero-actions">
-        <a href="#shop" class="btn btn-teal">Shop Now</a>
-        <a href="#problem" class="btn btn-ghost">Learn More</a>
+    <div class="container hero-inner">
+      <div class="hero-content">
+        <div class="hero-tag">New Technology · 2026 Release</div>
+        <h1 class="hero-wordmark">TENDON<span style="color:var(--teal)">X</span></h1>
+        <p class="hero-tagline">PROTECT. PREVENT. PERFORM.</p>
+        <p class="hero-sub">The smart knee sleeve with integrated patellar support, real-time impact tracking, and an AI-powered app that tells you exactly what your body needs.</p>
+        <div class="hero-actions">
+          <a href="#shop" class="btn btn-teal">Shop Now — $75</a>
+          <a href="#problem" class="btn btn-ghost">Learn More</a>
+        </div>
       </div>
-    </div>
-    <div class="hero-deco" aria-hidden="true">
-      <div class="deco-ring deco-ring-1"></div>
-      <div class="deco-ring deco-ring-2"></div>
-      <div class="deco-ring deco-ring-3"></div>
-      <div class="deco-center">TX</div>
+
+      <!-- Right side: athlete image slot -->
+      <div class="hero-visual" aria-hidden="true">
+        <div class="athlete-img-slot" style="animation: float 6s ease-in-out infinite;">
+          <!--
+            TO ADD YOUR ATHLETE PHOTO:
+            1. Generate an image (Midjourney, Adobe Firefly, DALL-E)
+               Prompt: "athlete wearing black knee sleeve with teal chip, volleyball/basketball action shot, dark studio background, dramatic lighting"
+            2. Save as hero-athlete.jpg in the same folder as this file
+            3. Uncomment the line below:
+            <img src="hero-athlete.jpg" alt="Athlete wearing Tendon X knee sleeve" />
+          -->
+          <div class="athlete-slot-placeholder">
+            <div class="slot-icon-lg">🏐</div>
+            <div class="slot-label">Add athlete photo here<br />(see HTML comment above)</div>
+          </div>
+        </div>
+        <div class="hero-stat-chip">
+          <div>
+            <div class="chip-val">8.2 kN</div>
+            <div class="chip-key">Impact Load</div>
+          </div>
+        </div>
+        <div class="hero-stat-chip">
+          <div>
+            <div class="chip-val">42</div>
+            <div class="chip-key">Jumps Tracked</div>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="hero-scroll">
       <span>Scroll</span>
@@ -1439,7 +1849,7 @@
           <div class="feature-content">
             <div class="feature-num">01 — Stabilization</div>
             <h3>Knee Stabilizer</h3>
-            <p>Built-in medial and lateral stabilizers provide side support and control through every lateral cut, pivot, and landing. The internal architecture keeps your knee tracking correctly even under maximum dynamic load.</p>
+            <p>Built-in medial and lateral stabilizers provide side support through every lateral cut, pivot, and landing. The internal architecture keeps your knee tracking correctly even under maximum dynamic load.</p>
           </div>
           <div class="feature-visual">
             <div class="product-art">
@@ -1457,7 +1867,7 @@
           <div class="feature-content">
             <div class="feature-num">02 — Padding</div>
             <h3>Sport-Specific Padding</h3>
-            <p>Volleyball version features a wider, rounded pad shaped for digs, floor slides, and rapid directional changes. Basketball version runs a sleek low-profile pad that disappears under shorts for unrestricted movement on the court.</p>
+            <p>Volleyball version features a wider, rounded pad for digs and floor slides. Basketball version runs a sleek low-profile pad that disappears under shorts for unrestricted movement on the court.</p>
           </div>
           <div class="feature-visual">
             <div class="product-art">
@@ -1479,7 +1889,7 @@
           <div class="feature-content">
             <div class="feature-num">03 — Strap Technology</div>
             <h3>Patellar Strap Technology</h3>
-            <p>Applies targeted compression directly to the patellar tendon, reducing strain with every jump and landing. The strap routes under the pad and exits through the side for a customized, secure cinch — protecting without restricting.</p>
+            <p>Applies targeted compression directly to the patellar tendon, reducing strain with every jump and landing. The strap routes under the pad and exits through the side for a customized, secure cinch.</p>
           </div>
           <div class="feature-visual">
             <div class="product-art" style="flex-direction:column;gap:8px">
@@ -1495,7 +1905,7 @@
           <div class="feature-content">
             <div class="feature-num">04 — Smart Chip</div>
             <h3>Chip Insert</h3>
-            <p>A removable smart chip slots into a secure pocket on the sleeve. It tracks every impact, every landing, and every rep — then syncs the data wirelessly to the Tendon X app in real time. No bulk. No wires. No distraction.</p>
+            <p>A removable smart chip slots into a secure pocket on the sleeve. It tracks every impact, every landing, and every rep — then syncs wirelessly to the Tendon X app in real time. No bulk. No wires. No distraction.</p>
           </div>
           <div class="feature-visual">
             <div class="product-art">
@@ -1520,7 +1930,7 @@
     <div class="container">
       <div class="section-header-center reveal">
         <div class="section-label" style="justify-content:center">Sport Versions</div>
-        <h2 class="section-headline">One Platform. Every Court.</h2>
+        <h2 class="section-headline">One Sleeve. Every Court.</h2>
         <p class="section-sub">Built from the ground up for the demands of each sport. Same protection. Different game.</p>
       </div>
 
@@ -1551,7 +1961,6 @@
         </div>
       </div>
 
-      <!-- Customization Tiers -->
       <div class="tiers-label reveal">
         <div class="section-label" style="justify-content:center">Customization Levels</div>
         <h3 class="section-headline" style="font-size:2rem">Choose Your Protection Level</h3>
@@ -1586,7 +1995,6 @@
     <div class="container">
       <div class="tech-inner">
 
-        <!-- App Mockup -->
         <div class="app-mockup reveal">
           <div class="app-topbar">
             <div class="app-topbar-brand">TENDON X</div>
@@ -1636,11 +2044,10 @@
           </div>
         </div>
 
-        <!-- Right column -->
         <div class="tech-content reveal" style="transition-delay:0.15s">
           <div class="section-label">Smart Technology</div>
           <h2 class="section-headline">Smarter<br />Protection</h2>
-          <p>Your knee produces data every time you play. For the first time, you can actually use it. The Tendon X chip tracks every impact and streams it directly to your phone — so you can train smarter and recover faster.</p>
+          <p>Your knee produces data every time you play. For the first time, you can actually use it. The Tendon X chip tracks every impact and streams it directly to the app — so you can train smarter and recover faster.</p>
           <div class="tech-bullets">
             <div class="tech-bullet">
               <div class="bullet-icon">⚡</div>
@@ -1664,15 +2071,150 @@
               </div>
             </div>
             <div class="tech-bullet">
-              <div class="bullet-icon">🤝</div>
+              <div class="bullet-icon">🧠</div>
               <div>
-                <strong>Share With Your Team</strong>
-                <span>Export session data directly to your trainer, coach, or sports medicine provider.</span>
+                <strong>AI Doctor (Pro)</strong>
+                <span>Upgrade to Pro and get personalized recovery plans, sport-specific guidance, and injury predictions powered by your own data.</span>
               </div>
             </div>
           </div>
-          <div class="chip-callout">
-            <strong>Chip Insert:</strong> A removable smart chip slots into a secure pocket on the sleeve. Tracks every landing. Syncs to your phone. <strong>No bulk. No distraction.</strong>
+          <a href="#app" class="btn btn-teal">Explore the App</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       6. THE TENDON X APP
+  ============================================================ -->
+  <section class="app-section" id="app">
+    <div class="container">
+      <div class="section-header-center reveal">
+        <div class="section-label" style="justify-content:center">The App</div>
+        <h2 class="section-headline">Your Data.<br />Your Edge.</h2>
+        <p class="section-sub">Every sleeve ships with the Tendon X app. Connect your chip, track every session, and unlock the AI Doctor with Pro.</p>
+      </div>
+
+      <div class="app-plans">
+        <!-- Free -->
+        <div class="app-plan reveal">
+          <div class="plan-badge free-badge">Free</div>
+          <h3>Tendon X Free</h3>
+          <p class="plan-price">$0 <span>/ forever</span></p>
+          <p class="plan-sub">Included with every sleeve purchase. Start tracking from day one — no subscription needed.</p>
+          <ul class="plan-features">
+            <li>Real-time impact tracking</li>
+            <li>Jump count &amp; landing score</li>
+            <li>Session load bar</li>
+            <li>Cumulative load history</li>
+            <li>Basic risk alerts</li>
+            <li>Session export (CSV)</li>
+            <li>Share with coach or trainer</li>
+          </ul>
+          <a href="#shop" class="btn btn-ghost btn-full-w">Included With Your Sleeve</a>
+        </div>
+
+        <!-- Pro -->
+        <div class="app-plan pro-plan reveal" style="transition-delay:0.1s">
+          <div class="plan-badge pro-badge">Pro</div>
+          <div class="plan-popular">Best Value</div>
+          <h3>Tendon X Pro</h3>
+          <p class="plan-price">$9.99 <span>/ month</span></p>
+          <p class="plan-sub">Unlock the AI Doctor — personalized guidance built from your chip data, your sport, and your training history.</p>
+          <ul class="plan-features">
+            <li>Everything in Free</li>
+            <li class="feature-hi">🧠 AI Doctor powered by your chip data</li>
+            <li class="feature-hi">Sport-specific load recommendations</li>
+            <li class="feature-hi">Personalized daily recovery plans</li>
+            <li class="feature-hi">Injury risk predictions</li>
+            <li class="feature-hi">Weekly performance reports</li>
+            <li class="feature-hi">Priority support</li>
+          </ul>
+          <button class="btn btn-teal btn-full-w" onclick="openModal()">Get Pro Early Access</button>
+        </div>
+      </div>
+
+      <!-- AI Doctor callout -->
+      <div class="ai-doctor-callout reveal">
+        <div class="ai-doctor-icon">🧠</div>
+        <div class="ai-doctor-text">
+          <h4>Meet the AI Doctor</h4>
+          <p>The AI Doctor reads your chip data in real time — your jump count, impact forces, landing scores, and session load — and translates it into clear, actionable guidance. It knows your sport, your training history, and what your tendons actually need right now. Not generic advice. <strong style="color:var(--white)">Your advice.</strong></p>
+        </div>
+        <div class="ai-message">
+          <div class="ai-avatar">AI</div>
+          <div class="ai-bubble">
+            <p>"Based on your last 3 sessions, your landing score has dropped 12%. This typically precedes a patellar flare-up in volleyball players at your intensity level. I'd recommend reducing jump sets by 30% tomorrow and adding 10 min post-session icing."</p>
+            <span class="ai-tag">Tendon X AI Doctor · Volleyball Profile</span>
+          </div>
+        </div>
+      </div>
+
+      <p class="app-download-note">Available on <strong>iOS</strong> and <strong>Android</strong> — free download, connects instantly via Bluetooth to your chip insert.</p>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       7. ATHLETES IN ACTION
+  ============================================================ -->
+  <section class="athletes" id="athletes">
+    <div class="container">
+      <div class="section-header-center reveal">
+        <div class="section-label" style="justify-content:center">In Action</div>
+        <h2 class="section-headline">Worn by Athletes.<br />Trusted on the Court.</h2>
+      </div>
+      <div class="athletes-grid">
+
+        <!-- Tall card -->
+        <div class="athlete-card athlete-card-tall reveal">
+          <!--
+            ADD PHOTO: athlete-1.jpg
+            Suggested prompt: "female volleyball player diving for a ball, wearing black knee sleeve with teal chip, dramatic lighting, dark background, action shot"
+            Uncomment: <img src="athlete-1.jpg" alt="Volleyball player wearing Tendon X" />
+          -->
+          <div class="athlete-placeholder">
+            <div class="athlete-placeholder-icon">🏐</div>
+            <div class="athlete-placeholder-text">Volleyball · athlete-1.jpg</div>
+          </div>
+          <div class="athlete-card-overlay">
+            <div class="athlete-card-label">On Every Dive</div>
+            <div class="athlete-card-sport">Volleyball</div>
+          </div>
+        </div>
+
+        <!-- Right column — two stacked -->
+        <div style="display:flex;flex-direction:column;gap:16px;">
+          <div class="athlete-card athlete-card-sq reveal" style="transition-delay:0.1s">
+            <!--
+              ADD PHOTO: athlete-2.jpg
+              Suggested prompt: "male basketball player jumping for a layup, wearing black knee sleeve, dark gym background, teal lighting accent"
+              Uncomment: <img src="athlete-2.jpg" alt="Basketball player wearing Tendon X" />
+            -->
+            <div class="athlete-placeholder">
+              <div class="athlete-placeholder-icon">🏀</div>
+              <div class="athlete-placeholder-text">Basketball · athlete-2.jpg</div>
+            </div>
+            <div class="athlete-card-overlay">
+              <div class="athlete-card-label">Game-Day Ready</div>
+              <div class="athlete-card-sport">Basketball</div>
+            </div>
+          </div>
+          <div class="athlete-card athlete-card-sq reveal" style="transition-delay:0.2s">
+            <!--
+              ADD PHOTO: athlete-3.jpg
+              Suggested prompt: "close-up of athlete's knee wearing Tendon X black sleeve with glowing teal microchip, dark background, cinematic"
+              Uncomment: <img src="athlete-3.jpg" alt="Close up of Tendon X knee sleeve and chip" />
+            -->
+            <div class="athlete-placeholder">
+              <div class="athlete-placeholder-icon">💡</div>
+              <div class="athlete-placeholder-text">Product shot · athlete-3.jpg</div>
+            </div>
+            <div class="athlete-card-overlay">
+              <div class="athlete-card-label">The Chip. Live.</div>
+              <div class="athlete-card-sport">Smart Technology</div>
+            </div>
           </div>
         </div>
 
@@ -1681,7 +2223,7 @@
   </section>
 
   <!-- ============================================================
-       6. BUILT TO LAST
+       8. BUILT TO LAST
   ============================================================ -->
   <section class="durability" id="durability">
     <div class="container">
@@ -1716,7 +2258,7 @@
   </section>
 
   <!-- ============================================================
-       7. TESTIMONIALS
+       9. TESTIMONIALS
   ============================================================ -->
   <section class="testimonials" id="testimonials">
     <div class="container">
@@ -1741,10 +2283,10 @@
         <div class="testimonial-card reveal" style="transition-delay:0.1s">
           <div>
             <div class="quote-mark">"</div>
-            <p class="quote-text">As a club coach, I'm always watching for overuse signs in my athletes. The data the Tendon X app gives me is something I've never had access to before. I can see when a player is approaching their load limit before they feel it. That's game-changing for injury prevention.</p>
+            <p class="quote-text">As a coach, I'm always watching for overuse signs. The data the Tendon X app gives me is something I've never had access to before. I can see when a player is approaching their load limit before they feel it. The AI Doctor feature is genuinely next level.</p>
           </div>
           <div class="quote-author">
-            <div class="author-avatar">CJ</div>
+            <div class="author-avatar">JT</div>
             <div>
               <span class="author-name">Coach James T.</span>
               <span class="author-role">Head Coach · Elite Volleyball Club</span>
@@ -1754,13 +2296,13 @@
         <div class="testimonial-card reveal" style="transition-delay:0.2s">
           <div>
             <div class="quote-mark">"</div>
-            <p class="quote-text">From a sports medicine standpoint, most knee pads offer zero clinical value. Tendon X is different — the patellar strap mechanics are sound, and the load data is the kind of information we actually use in rehabilitation planning. I'm recommending it to returning athletes.</p>
+            <p class="quote-text">From a sports medicine standpoint, most knee pads offer zero clinical value. Tendon X is different — the patellar strap mechanics are sound, and the load data is exactly what we use in rehabilitation planning. I recommend it to every returning athlete.</p>
           </div>
           <div class="quote-author">
-            <div class="author-avatar">DS</div>
+            <div class="author-avatar">SN</div>
             <div>
               <span class="author-name">Dr. Sarah N.</span>
-              <span class="author-role">Sports Medicine Trainer &amp; Physical Therapist</span>
+              <span class="author-role">Sports Medicine &amp; Physical Therapist</span>
             </div>
           </div>
         </div>
@@ -1769,44 +2311,70 @@
   </section>
 
   <!-- ============================================================
-       8. SHOP
+       10. SHOP
   ============================================================ -->
   <section class="shop" id="shop">
     <div class="container">
       <div class="section-header-center reveal">
         <div class="section-label" style="justify-content:center">Shop</div>
         <h2 class="section-headline">Find Your Fit</h2>
-        <p class="section-sub">Pick your sport. Pick your level. Start protecting what matters.</p>
+        <p class="section-sub">One product. Two sport versions. Pick yours and start protecting what matters.</p>
       </div>
 
       <div class="shop-cards">
+        <!-- Volleyball sleeve -->
         <div class="shop-card reveal">
           <div class="shop-icon">🏐</div>
-          <h3>Tendon X Volleyball Pad</h3>
-          <p>Rounded pad design for floor play. Full patellar strap, lateral stabilizers, and smart chip pocket included.</p>
-          <div class="shop-price">$129.99</div>
+          <h3>Tendon X Volleyball Sleeve</h3>
+          <p>Rounded pad for floor play, digs, and lateral movement. Full patellar strap, lateral stabilizers, and smart chip pocket included.</p>
+          <div class="shop-price">
+            $75
+            <span class="shop-price-sub">Per sleeve · chip sold separately</span>
+          </div>
           <button class="btn btn-teal" onclick="openModal()">Shop Now</button>
         </div>
+
+        <!-- Basketball sleeve (featured) -->
         <div class="shop-card featured reveal" style="transition-delay:0.1s">
           <div class="shop-icon">🏀</div>
           <h3>Tendon X Basketball Sleeve</h3>
-          <p>Long sleeve, low-profile pad for court play. Full patellar strap, medial/lateral stabilizers, and chip pocket.</p>
-          <div class="shop-price">$139.99</div>
+          <p>Long sleeve, low-profile pad built for court sessions. Full patellar strap, medial/lateral stabilizers, and chip pocket. Invisible under shorts.</p>
+          <div class="shop-price">
+            $75
+            <span class="shop-price-sub">Per sleeve · chip sold separately</span>
+          </div>
           <button class="btn btn-teal" onclick="openModal()">Shop Now</button>
         </div>
+
+        <!-- Smart chip add-on -->
         <div class="shop-card reveal" style="transition-delay:0.2s">
           <div class="shop-icon">💾</div>
           <h3>Smart Chip Module</h3>
-          <p>Add-on smart chip with app sync. Tracks impact load, jumps, and landing scores. Works with any Tendon X sleeve.</p>
-          <div class="shop-price">$49.99</div>
+          <p>The brain of Tendon X. Removable chip with wireless sync to the app. Tracks impact load, jumps, and landing scores. Works with any Tendon X sleeve.</p>
+          <div class="shop-price">
+            $49.99
+            <span class="shop-price-sub">Add-on · free app included</span>
+          </div>
           <button class="btn btn-outline-teal" onclick="openModal()">Add to Order</button>
+        </div>
+      </div>
+
+      <!-- Coming soon products strip -->
+      <div class="coming-strip reveal">
+        <div class="coming-strip-label">Coming Soon →</div>
+        <div class="coming-strip-items">
+          <div class="coming-item"><span>🏃</span> Running Sleeve</div>
+          <div class="coming-item"><span>⚽</span> Soccer Sleeve</div>
+          <div class="coming-item"><span>🎾</span> Tennis Sleeve</div>
+          <div class="coming-item"><span>🏋️</span> Lifting Sleeve</div>
+          <div class="coming-item"><span>+</span> More Sports</div>
         </div>
       </div>
 
       <!-- Email signup -->
       <div class="shop-signup reveal">
         <h3>Be First in Line</h3>
-        <p>Be the first to know when Tendon X drops. No spam. Just the launch date and early access.</p>
+        <p>Join the waitlist for early access, launch pricing, and updates on new sport versions.</p>
         <form class="signup-form" onsubmit="handleSignup(event)">
           <input type="email" placeholder="Enter your email address" required />
           <button type="submit" class="btn btn-teal">Notify Me</button>
@@ -1817,14 +2385,14 @@
   </section>
 
   <!-- ============================================================
-       9. FOOTER
+       11. FOOTER
   ============================================================ -->
   <footer class="footer">
     <div class="container footer-inner">
       <div class="footer-brand">
         <div class="footer-brand-name">TENDON<span>X</span></div>
         <div class="footer-tagline">Protect. Prevent. Perform.</div>
-        <p>The first customizable knee sleeve with integrated patellar support, stabilization, and real-time impact tracking.</p>
+        <p>The first smart knee sleeve with real-time impact tracking and an AI-powered app. Built for athletes who refuse to sit out.</p>
         <div class="footer-social">
           <a href="#" class="f-social-link" aria-label="Instagram">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
@@ -1844,16 +2412,16 @@
             <li><a href="#problem">The Problem</a></li>
             <li><a href="#solution">Our Solution</a></li>
             <li><a href="#tech">Technology</a></li>
-            <li><a href="#">About Us</a></li>
+            <li><a href="#app">The App</a></li>
           </ul>
         </div>
         <div class="footer-col">
-          <h4>Products</h4>
+          <h4>Shop</h4>
           <ul>
-            <li><a href="#shop">Volleyball Pad</a></li>
-            <li><a href="#shop">Basketball Sleeve</a></li>
-            <li><a href="#shop">Smart Chip</a></li>
-            <li><a href="#">Contact</a></li>
+            <li><a href="#shop">Volleyball Sleeve — $75</a></li>
+            <li><a href="#shop">Basketball Sleeve — $75</a></li>
+            <li><a href="#shop">Smart Chip — $49.99</a></li>
+            <li><a href="#shop">Join Waitlist</a></li>
           </ul>
         </div>
       </div>
@@ -1864,14 +2432,14 @@
   </footer>
 
   <!-- ============================================================
-       MODAL — Coming Soon
+       MODAL — Coming Soon / Waitlist
   ============================================================ -->
   <div class="modal-overlay" id="modalOverlay" onclick="closeModalOutside(event)">
     <div class="modal" role="dialog" aria-modal="true">
       <button class="modal-close" onclick="closeModal()" aria-label="Close">×</button>
       <div class="modal-icon">🔒</div>
       <h3>Coming Soon</h3>
-      <p>Tendon X launches soon. Join the waitlist for early access, launch pricing, and updates.</p>
+      <p>Tendon X launches soon. Join the waitlist for early access, launch pricing, and a first look at the AI Doctor.</p>
       <form class="modal-form" onsubmit="handleModal(event)">
         <input type="email" placeholder="Enter your email address" required />
         <button type="submit" class="btn btn-teal">Join the Waitlist</button>
@@ -1960,7 +2528,6 @@
       function step(now) {
         const elapsed = now - start;
         const progress = Math.min(elapsed / duration, 1);
-        // Ease out cubic
         const eased = 1 - Math.pow(1 - progress, 3);
         const value = Math.round(eased * target);
         el.textContent = prefix + value.toLocaleString() + suffix;
