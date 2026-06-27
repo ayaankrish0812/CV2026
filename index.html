@@ -1626,10 +1626,11 @@
        EXPLODED PRODUCT VIEW
     ============================================================ */
     .explode-section {
-      height: 220vh;
+      height: 260vh;
       position: relative;
       background: var(--bg-surface);
       border-top: 1px solid var(--border);
+      overflow: hidden;
     }
     .explode-sticky {
       position: sticky;
@@ -1638,23 +1639,31 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      overflow: hidden;
     }
     .explode-hdr {
       position: absolute;
-      top: calc(var(--nav-h) + 20px);
+      top: calc(var(--nav-h) + 16px);
       left: 0; right: 0;
       text-align: center;
       z-index: 20;
       pointer-events: none;
     }
+    /* Rotation wrapper — receives perspective + drag events */
+    #rotWrap {
+      perspective: 1100px;
+      cursor: grab;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+    #rotWrap.dragging { cursor: grabbing; }
     .explode-stage {
       position: relative;
-      width: 340px;
-      height: 340px;
+      width: 480px;
+      height: 480px;
       display: flex;
       align-items: center;
       justify-content: center;
+      transform-style: flat;
     }
     .e-layer {
       position: absolute;
@@ -1666,50 +1675,76 @@
     }
     .e-label {
       position: absolute;
-      bottom: calc(100% + 12px);
+      bottom: calc(100% + 14px);
       left: 50%;
       transform: translateX(-50%);
       opacity: 0;
-      font-size: 0.68rem;
+      font-size: 0.7rem;
       font-weight: 600;
       letter-spacing: 0.03em;
       color: var(--white);
-      background: rgba(10,10,10,0.92);
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(0,212,170,0.28);
-      border-radius: 8px;
-      padding: 8px 14px;
+      background: rgba(8,8,8,0.94);
+      backdrop-filter: blur(14px);
+      border: 1px solid rgba(0,212,170,0.32);
+      border-radius: 10px;
+      padding: 10px 16px;
       pointer-events: none;
       z-index: 30;
       text-align: center;
-      width: 158px;
-      line-height: 1.5;
+      width: 176px;
+      line-height: 1.55;
       white-space: normal;
+      transition: opacity 0.35s ease;
     }
     .e-label strong {
       display: block;
       color: var(--teal);
       margin-bottom: 3px;
-      font-size: 0.62rem;
+      font-size: 0.64rem;
       letter-spacing: 0.1em;
       text-transform: uppercase;
     }
     .e-label-below {
-      top: calc(100% + 12px);
+      top: calc(100% + 14px);
       bottom: auto;
     }
     .ghost-sleeve {
       position: absolute;
-      width: 110px;
-      height: 210px;
-      border: 1px dashed rgba(0,212,170,0.14);
-      border-radius: 55px;
+      width: 148px;
+      height: 284px;
+      border: 1px dashed rgba(0,212,170,0.15);
+      border-radius: 74px;
       pointer-events: none;
       z-index: 0;
+      transition: opacity 0.25s;
+    }
+    /* Drag-to-rotate hint badge */
+    .rotate-hint {
+      position: absolute;
+      top: calc(var(--nav-h) + 64px);
+      right: 0; left: 0;
+      text-align: center;
+      z-index: 22;
+      pointer-events: none;
+      transition: opacity 0.5s;
+    }
+    .rotate-hint-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: rgba(0,212,170,0.1);
+      border: 1px solid var(--teal-border);
+      border-radius: 50px;
+      padding: 6px 16px;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--teal);
     }
     .explode-foot {
       position: absolute;
-      bottom: 28px;
+      bottom: 24px;
       left: 0; right: 0;
       text-align: center;
       z-index: 20;
@@ -1717,7 +1752,7 @@
     }
     .explode-track-bar {
       display: inline-block;
-      width: 120px;
+      width: 130px;
       height: 2px;
       background: rgba(255,255,255,0.08);
       border-radius: 2px;
@@ -1793,6 +1828,7 @@
     }
 
     @media (max-width: 768px) {
+      .explode-stage { width: 280px; height: 280px; }
       .nav-links { display: none; }
       .nav-cta   { display: none; }
       .hamburger { display: flex; }
@@ -2073,102 +2109,111 @@
         <p style="color:var(--muted);font-size:0.82rem;margin-top:6px">Scroll to pull it apart</p>
       </div>
 
-      <div class="explode-stage" id="explodeStage">
-
-        <!-- Ghost sleeve outline (assembled reference, fades as pieces separate) -->
-        <div class="ghost-sleeve" id="ghostSleeve"></div>
-
-        <!-- Layer 1 — Inner Lining (z:1, drops center) -->
-        <div class="e-layer" id="el-lining" style="z-index:1">
-          <svg width="106" height="206" viewBox="0 0 106 206">
-            <rect x="2" y="2" width="102" height="202" rx="51" fill="#141414" stroke="rgba(255,255,255,0.07)" stroke-width="1.5"/>
-            <circle cx="30" cy="55" r="2.5" fill="rgba(255,255,255,0.07)"/><circle cx="53" cy="55" r="2.5" fill="rgba(255,255,255,0.07)"/><circle cx="76" cy="55" r="2.5" fill="rgba(255,255,255,0.07)"/>
-            <circle cx="30" cy="80" r="2.5" fill="rgba(255,255,255,0.07)"/><circle cx="53" cy="80" r="2.5" fill="rgba(255,255,255,0.07)"/><circle cx="76" cy="80" r="2.5" fill="rgba(255,255,255,0.07)"/>
-            <circle cx="30" cy="103" r="2.5" fill="rgba(255,255,255,0.07)"/><circle cx="53" cy="103" r="2.5" fill="rgba(255,255,255,0.07)"/><circle cx="76" cy="103" r="2.5" fill="rgba(255,255,255,0.07)"/>
-            <circle cx="30" cy="128" r="2.5" fill="rgba(255,255,255,0.07)"/><circle cx="53" cy="128" r="2.5" fill="rgba(255,255,255,0.07)"/><circle cx="76" cy="128" r="2.5" fill="rgba(255,255,255,0.07)"/>
-            <circle cx="30" cy="152" r="2.5" fill="rgba(255,255,255,0.07)"/><circle cx="53" cy="152" r="2.5" fill="rgba(255,255,255,0.07)"/><circle cx="76" cy="152" r="2.5" fill="rgba(255,255,255,0.07)"/>
-          </svg>
-          <div class="e-label e-label-below"><strong>Inner Lining</strong>Breathable, anti-slip inner lining</div>
-        </div>
-
-        <!-- Layer 2 — Medial Stabilizer (z:2, flies left) -->
-        <div class="e-layer" id="el-stab-l" style="z-index:2">
-          <svg width="14" height="162" viewBox="0 0 14 162">
-            <rect x="1" y="1" width="12" height="160" rx="6" fill="#2d4a6e" stroke="rgba(61,90,128,0.55)" stroke-width="1"/>
-            <line x1="1" y1="27" x2="13" y2="27" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
-            <line x1="1" y1="54" x2="13" y2="54" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
-            <line x1="1" y1="81" x2="13" y2="81" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
-            <line x1="1" y1="108" x2="13" y2="108" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
-            <line x1="1" y1="135" x2="13" y2="135" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
-          </svg>
-          <div class="e-label e-label-below"><strong>Medial Stabilizer</strong>Inner-side support for lateral cuts</div>
-        </div>
-
-        <!-- Layer 3 — Lateral Stabilizer (z:2, flies right) -->
-        <div class="e-layer" id="el-stab-r" style="z-index:2">
-          <svg width="14" height="162" viewBox="0 0 14 162">
-            <rect x="1" y="1" width="12" height="160" rx="6" fill="#2d4a6e" stroke="rgba(61,90,128,0.55)" stroke-width="1"/>
-            <line x1="1" y1="27" x2="13" y2="27" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
-            <line x1="1" y1="54" x2="13" y2="54" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
-            <line x1="1" y1="81" x2="13" y2="81" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
-            <line x1="1" y1="108" x2="13" y2="108" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
-            <line x1="1" y1="135" x2="13" y2="135" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
-          </svg>
-          <div class="e-label e-label-below"><strong>Lateral Stabilizer</strong>Outer-side support for pivots &amp; landings</div>
-        </div>
-
-        <!-- Layer 4 — Patellar Strap (z:3, flies lower-left) -->
-        <div class="e-layer" id="el-strap" style="z-index:3">
-          <svg width="112" height="16" viewBox="0 0 112 16">
-            <rect x="1" y="1" width="110" height="14" rx="7" fill="rgba(255,255,255,0.84)" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
-            <rect x="45" y="3" width="22" height="10" rx="3" fill="rgba(0,0,0,0.22)" stroke="rgba(255,255,255,0.4)" stroke-width="1"/>
-            <line x1="10" y1="5" x2="42" y2="5" stroke="rgba(0,0,0,0.15)" stroke-width="1" stroke-dasharray="3,2"/>
-            <line x1="70" y1="5" x2="102" y2="5" stroke="rgba(0,0,0,0.15)" stroke-width="1" stroke-dasharray="3,2"/>
-          </svg>
-          <div class="e-label"><strong>Patellar Strap</strong>Targeted tendon compression strap</div>
-        </div>
-
-        <!-- Layer 5 — Smart Chip (z:4, flies lower-right) -->
-        <div class="e-layer" id="el-chip" style="z-index:4">
-          <svg width="38" height="38" viewBox="0 0 38 38">
-            <rect x="2" y="2" width="34" height="34" rx="7" fill="#040d0a" stroke="#00d4aa" stroke-width="1.5"/>
-            <rect x="8" y="8" width="22" height="22" rx="3" fill="none" stroke="rgba(0,212,170,0.28)" stroke-width="1"/>
-            <line x1="19" y1="8" x2="19" y2="30" stroke="rgba(0,212,170,0.22)" stroke-width="1"/>
-            <line x1="8" y1="19" x2="30" y2="19" stroke="rgba(0,212,170,0.22)" stroke-width="1"/>
-            <circle cx="19" cy="19" r="4" fill="#00d4aa"/>
-            <circle cx="19" cy="19" r="4" fill="#00d4aa" opacity="0.35" style="animation:blink 1.8s ease-in-out infinite"/>
-          </svg>
-          <div class="e-label"><strong>Smart Chip</strong>Impact sensor, syncs to Tendon X app</div>
-        </div>
-
-        <!-- Layer 5 — Sport Padding (z:5, flies upper-right) -->
-        <div class="e-layer" id="el-padding" style="z-index:5">
-          <svg width="96" height="72" viewBox="0 0 96 72">
-            <rect x="2" y="2" width="92" height="68" rx="18" fill="rgba(0,212,170,0.13)" stroke="rgba(0,212,170,0.48)" stroke-width="1.5"/>
-            <line x1="16" y1="18" x2="80" y2="18" stroke="rgba(0,212,170,0.12)" stroke-width="1"/>
-            <line x1="12" y1="33" x2="84" y2="33" stroke="rgba(0,212,170,0.12)" stroke-width="1"/>
-            <line x1="12" y1="48" x2="84" y2="48" stroke="rgba(0,212,170,0.12)" stroke-width="1"/>
-            <line x1="16" y1="57" x2="80" y2="57" stroke="rgba(0,212,170,0.07)" stroke-width="1"/>
-          </svg>
-          <div class="e-label e-label-below"><strong>Impact Padding</strong>Sport-specific absorption pad</div>
-        </div>
-
-        <!-- Layer 6 — Outer Shell (z:6, topmost when assembled, flies upper-left) -->
-        <div class="e-layer" id="el-shell" style="z-index:6">
-          <svg width="114" height="214" viewBox="0 0 114 214">
-            <rect x="2" y="2" width="110" height="210" rx="55" fill="#1a1a1a" stroke="rgba(255,255,255,0.14)" stroke-width="1.5"/>
-            <line x1="26" y1="46" x2="88" y2="46" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
-            <line x1="20" y1="66" x2="94" y2="66" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
-            <line x1="17" y1="86" x2="97" y2="86" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
-            <line x1="17" y1="107" x2="97" y2="107" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
-            <line x1="17" y1="128" x2="97" y2="128" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
-            <line x1="20" y1="148" x2="94" y2="148" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
-            <line x1="26" y1="168" x2="88" y2="168" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
-          </svg>
-          <div class="e-label e-label-below"><strong>Outer Shell</strong>Moisture-wicking compression fabric</div>
-        </div>
-
+      <!-- Drag-to-rotate hint -->
+      <div class="rotate-hint" id="rotateHint">
+        <span class="rotate-hint-pill">⟳ Drag to rotate</span>
       </div>
+
+      <!-- Rotation wrapper (handles perspective + drag) -->
+      <div id="rotWrap">
+        <div class="explode-stage" id="explodeStage">
+
+          <!-- Ghost sleeve outline -->
+          <div class="ghost-sleeve" id="ghostSleeve"></div>
+
+          <!-- Layer 1 — Inner Lining (drops center) -->
+          <div class="e-layer" id="el-lining" style="z-index:1">
+            <svg width="143" height="278" viewBox="0 0 106 206">
+              <rect x="2" y="2" width="102" height="202" rx="51" fill="#141414" stroke="rgba(255,255,255,0.07)" stroke-width="1.5"/>
+              <circle cx="30" cy="45" r="3" fill="rgba(255,255,255,0.07)"/><circle cx="53" cy="45" r="3" fill="rgba(255,255,255,0.07)"/><circle cx="76" cy="45" r="3" fill="rgba(255,255,255,0.07)"/>
+              <circle cx="30" cy="70" r="3" fill="rgba(255,255,255,0.07)"/><circle cx="53" cy="70" r="3" fill="rgba(255,255,255,0.07)"/><circle cx="76" cy="70" r="3" fill="rgba(255,255,255,0.07)"/>
+              <circle cx="30" cy="95" r="3" fill="rgba(255,255,255,0.07)"/><circle cx="53" cy="95" r="3" fill="rgba(255,255,255,0.07)"/><circle cx="76" cy="95" r="3" fill="rgba(255,255,255,0.07)"/>
+              <circle cx="30" cy="120" r="3" fill="rgba(255,255,255,0.07)"/><circle cx="53" cy="120" r="3" fill="rgba(255,255,255,0.07)"/><circle cx="76" cy="120" r="3" fill="rgba(255,255,255,0.07)"/>
+              <circle cx="30" cy="145" r="3" fill="rgba(255,255,255,0.07)"/><circle cx="53" cy="145" r="3" fill="rgba(255,255,255,0.07)"/><circle cx="76" cy="145" r="3" fill="rgba(255,255,255,0.07)"/>
+              <circle cx="30" cy="170" r="3" fill="rgba(255,255,255,0.07)"/><circle cx="53" cy="170" r="3" fill="rgba(255,255,255,0.07)"/><circle cx="76" cy="170" r="3" fill="rgba(255,255,255,0.07)"/>
+            </svg>
+            <div class="e-label e-label-below"><strong>Inner Lining</strong>Breathable, anti-slip inner lining</div>
+          </div>
+
+          <!-- Layer 2 — Medial Stabilizer (flies left) -->
+          <div class="e-layer" id="el-stab-l" style="z-index:2">
+            <svg width="19" height="219" viewBox="0 0 14 162">
+              <rect x="1" y="1" width="12" height="160" rx="6" fill="#2d4a6e" stroke="rgba(61,90,128,0.6)" stroke-width="1"/>
+              <line x1="1" y1="27" x2="13" y2="27" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+              <line x1="1" y1="54" x2="13" y2="54" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+              <line x1="1" y1="81" x2="13" y2="81" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+              <line x1="1" y1="108" x2="13" y2="108" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+              <line x1="1" y1="135" x2="13" y2="135" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+            </svg>
+            <div class="e-label e-label-below"><strong>Medial Stabilizer</strong>Inner-side support for lateral cuts</div>
+          </div>
+
+          <!-- Layer 3 — Lateral Stabilizer (flies right) -->
+          <div class="e-layer" id="el-stab-r" style="z-index:2">
+            <svg width="19" height="219" viewBox="0 0 14 162">
+              <rect x="1" y="1" width="12" height="160" rx="6" fill="#2d4a6e" stroke="rgba(61,90,128,0.6)" stroke-width="1"/>
+              <line x1="1" y1="27" x2="13" y2="27" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+              <line x1="1" y1="54" x2="13" y2="54" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+              <line x1="1" y1="81" x2="13" y2="81" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+              <line x1="1" y1="108" x2="13" y2="108" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+              <line x1="1" y1="135" x2="13" y2="135" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+            </svg>
+            <div class="e-label e-label-below"><strong>Lateral Stabilizer</strong>Outer-side support for pivots &amp; landings</div>
+          </div>
+
+          <!-- Layer 4 — Patellar Strap (flies lower-left) -->
+          <div class="e-layer" id="el-strap" style="z-index:3">
+            <svg width="151" height="22" viewBox="0 0 112 16">
+              <rect x="1" y="1" width="110" height="14" rx="7" fill="rgba(255,255,255,0.86)" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
+              <rect x="44" y="3" width="24" height="10" rx="3" fill="rgba(0,0,0,0.22)" stroke="rgba(255,255,255,0.45)" stroke-width="1"/>
+              <line x1="8" y1="5" x2="41" y2="5" stroke="rgba(0,0,0,0.15)" stroke-width="1" stroke-dasharray="3,2"/>
+              <line x1="71" y1="5" x2="104" y2="5" stroke="rgba(0,0,0,0.15)" stroke-width="1" stroke-dasharray="3,2"/>
+            </svg>
+            <div class="e-label"><strong>Patellar Strap</strong>Targeted tendon compression strap</div>
+          </div>
+
+          <!-- Layer 5 — Smart Chip (flies lower-right) -->
+          <div class="e-layer" id="el-chip" style="z-index:4">
+            <svg width="51" height="51" viewBox="0 0 38 38">
+              <rect x="2" y="2" width="34" height="34" rx="7" fill="#040d0a" stroke="#00d4aa" stroke-width="1.5"/>
+              <rect x="7" y="7" width="24" height="24" rx="3" fill="none" stroke="rgba(0,212,170,0.3)" stroke-width="1"/>
+              <line x1="19" y1="7" x2="19" y2="31" stroke="rgba(0,212,170,0.22)" stroke-width="1"/>
+              <line x1="7" y1="19" x2="31" y2="19" stroke="rgba(0,212,170,0.22)" stroke-width="1"/>
+              <circle cx="19" cy="19" r="5" fill="#00d4aa"/>
+              <circle cx="19" cy="19" r="5" fill="#00d4aa" opacity="0.3" style="animation:blink 1.8s ease-in-out infinite"/>
+            </svg>
+            <div class="e-label"><strong>Smart Chip</strong>Impact sensor, syncs to Tendon X app</div>
+          </div>
+
+          <!-- Layer 6 — Sport Padding (flies upper-right) -->
+          <div class="e-layer" id="el-padding" style="z-index:5">
+            <svg width="130" height="97" viewBox="0 0 96 72">
+              <rect x="2" y="2" width="92" height="68" rx="18" fill="rgba(0,212,170,0.14)" stroke="rgba(0,212,170,0.5)" stroke-width="1.5"/>
+              <line x1="14" y1="18" x2="82" y2="18" stroke="rgba(0,212,170,0.14)" stroke-width="1"/>
+              <line x1="10" y1="33" x2="86" y2="33" stroke="rgba(0,212,170,0.14)" stroke-width="1"/>
+              <line x1="10" y1="48" x2="86" y2="48" stroke="rgba(0,212,170,0.14)" stroke-width="1"/>
+              <line x1="14" y1="58" x2="82" y2="58" stroke="rgba(0,212,170,0.08)" stroke-width="1"/>
+            </svg>
+            <div class="e-label e-label-below"><strong>Impact Padding</strong>Sport-specific absorption pad</div>
+          </div>
+
+          <!-- Layer 7 — Outer Shell (topmost assembled, flies upper-left) -->
+          <div class="e-layer" id="el-shell" style="z-index:6">
+            <svg width="154" height="289" viewBox="0 0 114 214">
+              <rect x="2" y="2" width="110" height="210" rx="55" fill="#1c1c1c" stroke="rgba(255,255,255,0.15)" stroke-width="1.5"/>
+              <line x1="24" y1="44" x2="90" y2="44" stroke="rgba(255,255,255,0.045)" stroke-width="1"/>
+              <line x1="18" y1="64" x2="96" y2="64" stroke="rgba(255,255,255,0.045)" stroke-width="1"/>
+              <line x1="15" y1="84" x2="99" y2="84" stroke="rgba(255,255,255,0.045)" stroke-width="1"/>
+              <line x1="15" y1="107" x2="99" y2="107" stroke="rgba(255,255,255,0.045)" stroke-width="1"/>
+              <line x1="15" y1="130" x2="99" y2="130" stroke="rgba(255,255,255,0.045)" stroke-width="1"/>
+              <line x1="18" y1="150" x2="96" y2="150" stroke="rgba(255,255,255,0.045)" stroke-width="1"/>
+              <line x1="24" y1="170" x2="90" y2="170" stroke="rgba(255,255,255,0.045)" stroke-width="1"/>
+            </svg>
+            <div class="e-label e-label-below"><strong>Outer Shell</strong>Moisture-wicking compression fabric</div>
+          </div>
+
+        </div>
+      </div><!-- end #rotWrap -->
 
       <div class="explode-foot">
         <span class="explode-hint-txt" id="explodeHint">Scroll to explore</span>
@@ -2585,7 +2630,7 @@
           <h3>Tendon X Volleyball Sleeve</h3>
           <p>Rounded pad for floor play, digs, and lateral movement. Full patellar strap, lateral stabilizers, and smart chip pocket included.</p>
           <div class="shop-price">
-            $75
+            $89.99
             <span class="shop-price-sub">Sleeve + smart chip + free app included</span>
           </div>
           <button class="btn btn-teal" onclick="openModal()">Shop Now</button>
@@ -2597,7 +2642,7 @@
           <h3>Tendon X Basketball Sleeve</h3>
           <p>Long sleeve, low-profile pad built for court sessions. Full patellar strap, medial/lateral stabilizers, and smart chip included. Invisible under shorts.</p>
           <div class="shop-price">
-            $75
+            $89.99
             <span class="shop-price-sub">Sleeve + smart chip + free app included</span>
           </div>
           <button class="btn btn-teal" onclick="openModal()">Shop Now</button>
@@ -2677,8 +2722,8 @@
         <div class="footer-col">
           <h4>Shop</h4>
           <ul>
-            <li><a href="#shop">Volleyball Sleeve — $75</a></li>
-            <li><a href="#shop">Basketball Sleeve — $75</a></li>
+            <li><a href="#shop">Volleyball Sleeve — $89.99</a></li>
+            <li><a href="#shop">Basketball Sleeve — $89.99</a></li>
             <li><a href="#shop">Smart Chip — Included</a></li>
             <li><a href="#shop">Join Waitlist</a></li>
           </ul>
@@ -2826,61 +2871,146 @@
     );
     sections.forEach(s => scrollSpy.observe(s));
 
-    /* ---- Exploded product view ---- */
+    /* ---- Exploded product view + drag rotation ---- */
     (function () {
-      const section = document.getElementById('explode');
-      if (!section) return;
-
-      const fill    = document.getElementById('explodeFill');
-      const hint    = document.getElementById('explodeHint');
-      const ghost   = document.getElementById('ghostSleeve');
+      const section  = document.getElementById('explode');
+      const rotWrap  = document.getElementById('rotWrap');
+      const stage    = document.getElementById('explodeStage');
+      const fill     = document.getElementById('explodeFill');
+      const hint     = document.getElementById('explodeHint');
+      const ghost    = document.getElementById('ghostSleeve');
+      const rotHint  = document.getElementById('rotateHint');
+      if (!section || !stage) return;
 
       const isMob = () => window.innerWidth <= 768;
 
       // [id, explodedTx, explodedTy, explodedRot]
       const comps = [
-        ['el-shell',   -255, -190, -13],
-        ['el-padding',  245, -205,  15],
-        ['el-stab-l',  -285,   25,  -7],
-        ['el-stab-r',   285,   25,   7],
-        ['el-strap',   -215,  195, -10],
-        ['el-chip',     205,  195,  12],
-        ['el-lining',     0,  120,   0],
+        ['el-shell',   -340, -250, -13],
+        ['el-padding',  325, -265,  15],
+        ['el-stab-l',  -370,   30,  -7],
+        ['el-stab-r',   370,   30,   7],
+        ['el-strap',   -280,  255, -10],
+        ['el-chip',     268,  255,  12],
+        ['el-lining',     0,  155,   0],
       ];
 
       function eio(t) { return t < 0.5 ? 2*t*t : -1+(4-2*t)*t; }
       function lerp(a, b, t) { return a + (b - a) * t; }
 
-      function update(p) {
+      /* -- Scroll-driven explode -- */
+      let scrollProg = 0;
+      function applyExplode(p) {
         const e = eio(Math.max(0, Math.min(1, p)));
-        const s = isMob() ? 0.52 : 1;
-
+        const s = isMob() ? 0.46 : 1;
         comps.forEach(([id, tx, ty, rot]) => {
           const el = document.getElementById(id);
           if (!el) return;
           el.style.transform =
             `translate(${lerp(0, tx * s, e)}px, ${lerp(0, ty * s, e)}px) rotate(${lerp(0, rot, e)}deg)`;
           const lbl = el.querySelector('.e-label');
-          if (lbl) lbl.style.opacity = p > 0.62 ? Math.min(1, (p - 0.62) / 0.22) : 0;
+          if (lbl) lbl.style.opacity = p > 0.60 ? Math.min(1, (p - 0.60) / 0.24) : 0;
         });
-
-        if (ghost) ghost.style.opacity = Math.max(0, 1 - e * 2.5);
+        if (ghost) ghost.style.opacity = Math.max(0, 1 - e * 2.8);
         if (fill)  fill.style.width = (p * 100) + '%';
         if (hint)  hint.textContent =
-          p < 0.04 ? 'Scroll to explore' :
-          p > 0.92 ? 'Fully exploded — scroll back to reassemble' :
-          'Keep scrolling';
+          p < 0.04 ? 'Scroll to explode' :
+          p > 0.92 ? 'Scroll back to reassemble' : 'Keep scrolling';
       }
 
       function onScroll() {
         const rect = section.getBoundingClientRect();
         const scrollable = section.offsetHeight - window.innerHeight;
         if (scrollable <= 0) return;
-        update(Math.max(0, Math.min(1, -rect.top / scrollable)));
+        scrollProg = Math.max(0, Math.min(1, -rect.top / scrollable));
+        applyExplode(scrollProg);
       }
-
       window.addEventListener('scroll', onScroll, { passive: true });
       onScroll();
+
+      /* -- Drag-to-rotate (applied to rotWrap via perspective) -- */
+      let rotX = -8, rotY = 0;       // current rotation angles
+      let tgtX = -8, tgtY = 0;       // lerp targets
+      let dragOn = false;
+      let lastMX = 0, lastMY = 0;
+      let rafId = null;
+      let hasRotated = false;
+
+      function applyRot() {
+        // Smooth lerp toward target
+        rotX = lerp(rotX, tgtX, 0.12);
+        rotY = lerp(rotY, tgtY, 0.12);
+        if (rotWrap) rotWrap.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg)`;
+        const stillMoving = Math.abs(rotX - tgtX) > 0.05 || Math.abs(rotY - tgtY) > 0.05;
+        if (stillMoving || dragOn) rafId = requestAnimationFrame(applyRot);
+        else rafId = null;
+      }
+
+      function startRaf() { if (!rafId) rafId = requestAnimationFrame(applyRot); }
+
+      // Mouse
+      if (rotWrap) {
+        rotWrap.addEventListener('mousedown', e => {
+          dragOn = true;
+          lastMX = e.clientX;
+          lastMY = e.clientY;
+          rotWrap.classList.add('dragging');
+          startRaf();
+        });
+      }
+      document.addEventListener('mousemove', e => {
+        if (!dragOn) return;
+        const dx = e.clientX - lastMX;
+        const dy = e.clientY - lastMY;
+        lastMX = e.clientX;
+        lastMY = e.clientY;
+        tgtY += dx * 0.45;
+        tgtX -= dy * 0.30;
+        tgtX = Math.max(-35, Math.min(35, tgtX));
+        if (!hasRotated && (Math.abs(dx) > 3 || Math.abs(dy) > 3)) {
+          hasRotated = true;
+          if (rotHint) rotHint.style.opacity = '0';
+        }
+      });
+      document.addEventListener('mouseup', () => {
+        if (!dragOn) return;
+        dragOn = false;
+        if (rotWrap) rotWrap.classList.remove('dragging');
+      });
+
+      // Touch
+      if (rotWrap) {
+        let lastTX = 0, lastTY = 0;
+        rotWrap.addEventListener('touchstart', e => {
+          dragOn = true;
+          lastTX = e.touches[0].clientX;
+          lastTY = e.touches[0].clientY;
+          startRaf();
+        }, { passive: true });
+        rotWrap.addEventListener('touchmove', e => {
+          if (!dragOn) return;
+          const dx = e.touches[0].clientX - lastTX;
+          const dy = e.touches[0].clientY - lastTY;
+          lastTX = e.touches[0].clientX;
+          lastTY = e.touches[0].clientY;
+          tgtY += dx * 0.45;
+          tgtX -= dy * 0.30;
+          tgtX = Math.max(-35, Math.min(35, tgtX));
+          if (!hasRotated) { hasRotated = true; if (rotHint) rotHint.style.opacity = '0'; }
+        }, { passive: true });
+        rotWrap.addEventListener('touchend', () => { dragOn = false; });
+      }
+
+      // Double-click resets rotation
+      if (rotWrap) {
+        rotWrap.addEventListener('dblclick', () => {
+          tgtX = -8; tgtY = 0;
+          startRaf();
+        });
+      }
+
+      // Start the lerp loop for initial slight tilt
+      startRaf();
     })();
 
     /* ---- Hero canvas particles ---- */
