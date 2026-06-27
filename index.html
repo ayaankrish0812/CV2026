@@ -1915,17 +1915,13 @@
       <!-- Right side: athlete image slot -->
       <div class="hero-visual" aria-hidden="true">
         <div class="athlete-img-slot" style="animation: float 6s ease-in-out infinite;">
-          <!--
-            TO ADD YOUR ATHLETE PHOTO:
-            1. Generate an image (Midjourney, Adobe Firefly, DALL-E)
-               Prompt: "athlete wearing black knee sleeve with teal chip, volleyball/basketball action shot, dark studio background, dramatic lighting"
-            2. Save as hero-athlete.jpg in the same folder as this file
-            3. Uncomment the line below:
-            <img src="hero-athlete.jpg" alt="Athlete wearing Tendon X knee sleeve" />
-          -->
+          <img src="https://images.unsplash.com/photo-1547241428-ee379e8e6b2a?auto=format&fit=crop&w=800&q=80"
+               alt="Athlete wearing Tendon X knee sleeve"
+               style="width:100%;height:100%;object-fit:cover;border-radius:inherit;"
+               onerror="this.style.display='none'" />
           <div class="athlete-slot-placeholder">
             <div class="slot-icon-lg">🏐</div>
-            <div class="slot-label">Add athlete photo here<br />(see HTML comment above)</div>
+            <div class="slot-label">Add athlete photo here</div>
           </div>
         </div>
         <div class="hero-stat-chip">
@@ -2124,13 +2120,36 @@
           <!-- Layer 1 — Inner Lining (drops center) -->
           <div class="e-layer" id="el-lining" style="z-index:1">
             <svg width="143" height="278" viewBox="0 0 106 206">
-              <rect x="2" y="2" width="102" height="202" rx="51" fill="#141414" stroke="rgba(255,255,255,0.07)" stroke-width="1.5"/>
-              <circle cx="30" cy="45" r="3" fill="rgba(255,255,255,0.07)"/><circle cx="53" cy="45" r="3" fill="rgba(255,255,255,0.07)"/><circle cx="76" cy="45" r="3" fill="rgba(255,255,255,0.07)"/>
-              <circle cx="30" cy="70" r="3" fill="rgba(255,255,255,0.07)"/><circle cx="53" cy="70" r="3" fill="rgba(255,255,255,0.07)"/><circle cx="76" cy="70" r="3" fill="rgba(255,255,255,0.07)"/>
-              <circle cx="30" cy="95" r="3" fill="rgba(255,255,255,0.07)"/><circle cx="53" cy="95" r="3" fill="rgba(255,255,255,0.07)"/><circle cx="76" cy="95" r="3" fill="rgba(255,255,255,0.07)"/>
-              <circle cx="30" cy="120" r="3" fill="rgba(255,255,255,0.07)"/><circle cx="53" cy="120" r="3" fill="rgba(255,255,255,0.07)"/><circle cx="76" cy="120" r="3" fill="rgba(255,255,255,0.07)"/>
-              <circle cx="30" cy="145" r="3" fill="rgba(255,255,255,0.07)"/><circle cx="53" cy="145" r="3" fill="rgba(255,255,255,0.07)"/><circle cx="76" cy="145" r="3" fill="rgba(255,255,255,0.07)"/>
-              <circle cx="30" cy="170" r="3" fill="rgba(255,255,255,0.07)"/><circle cx="53" cy="170" r="3" fill="rgba(255,255,255,0.07)"/><circle cx="76" cy="170" r="3" fill="rgba(255,255,255,0.07)"/>
+              <!-- Inner moisture-wicking fabric body -->
+              <path d="M22,3 Q4,3 4,24 L4,78 Q2,95 2,103 Q2,111 4,128 L4,182 Q4,203 22,203 L84,203 Q102,203 102,182 L102,128 Q104,111 104,103 Q104,95 102,78 L102,24 Q102,3 84,3 Z" fill="#131313" stroke="rgba(255,255,255,0.08)" stroke-width="1.5"/>
+              <!-- Diamond mesh — upper zone -->
+              <circle cx="28" cy="34" r="2" fill="rgba(255,255,255,0.07)"/>
+              <circle cx="53" cy="34" r="2" fill="rgba(255,255,255,0.07)"/>
+              <circle cx="78" cy="34" r="2" fill="rgba(255,255,255,0.07)"/>
+              <circle cx="40" cy="52" r="2" fill="rgba(255,255,255,0.07)"/>
+              <circle cx="66" cy="52" r="2" fill="rgba(255,255,255,0.07)"/>
+              <circle cx="28" cy="70" r="2" fill="rgba(255,255,255,0.07)"/>
+              <circle cx="53" cy="70" r="2" fill="rgba(255,255,255,0.07)"/>
+              <circle cx="78" cy="70" r="2" fill="rgba(255,255,255,0.07)"/>
+              <line x1="30" y1="35" x2="38" y2="51" stroke="rgba(255,255,255,0.04)" stroke-width="0.8"/>
+              <line x1="55" y1="35" x2="64" y2="51" stroke="rgba(255,255,255,0.04)" stroke-width="0.8"/>
+              <line x1="42" y1="53" x2="51" y2="69" stroke="rgba(255,255,255,0.04)" stroke-width="0.8"/>
+              <line x1="68" y1="53" x2="76" y2="69" stroke="rgba(255,255,255,0.04)" stroke-width="0.8"/>
+              <!-- Patellar compression zone hint -->
+              <ellipse cx="53" cy="103" rx="26" ry="32" fill="none" stroke="rgba(0,212,170,0.08)" stroke-width="1.5"/>
+              <!-- Diamond mesh — lower zone -->
+              <circle cx="28" cy="138" r="2" fill="rgba(255,255,255,0.07)"/>
+              <circle cx="53" cy="138" r="2" fill="rgba(255,255,255,0.07)"/>
+              <circle cx="78" cy="138" r="2" fill="rgba(255,255,255,0.07)"/>
+              <circle cx="40" cy="156" r="2" fill="rgba(255,255,255,0.07)"/>
+              <circle cx="66" cy="156" r="2" fill="rgba(255,255,255,0.07)"/>
+              <circle cx="28" cy="174" r="2" fill="rgba(255,255,255,0.07)"/>
+              <circle cx="53" cy="174" r="2" fill="rgba(255,255,255,0.07)"/>
+              <circle cx="78" cy="174" r="2" fill="rgba(255,255,255,0.07)"/>
+              <line x1="30" y1="139" x2="38" y2="155" stroke="rgba(255,255,255,0.04)" stroke-width="0.8"/>
+              <line x1="55" y1="139" x2="64" y2="155" stroke="rgba(255,255,255,0.04)" stroke-width="0.8"/>
+              <line x1="42" y1="157" x2="51" y2="173" stroke="rgba(255,255,255,0.04)" stroke-width="0.8"/>
+              <line x1="68" y1="157" x2="76" y2="173" stroke="rgba(255,255,255,0.04)" stroke-width="0.8"/>
             </svg>
             <div class="e-label e-label-below"><strong>Inner Lining</strong>Breathable, anti-slip inner lining</div>
           </div>
@@ -2138,12 +2157,23 @@
           <!-- Layer 2 — Medial Stabilizer (flies left) -->
           <div class="e-layer" id="el-stab-l" style="z-index:2">
             <svg width="19" height="219" viewBox="0 0 14 162">
-              <rect x="1" y="1" width="12" height="160" rx="6" fill="#2d4a6e" stroke="rgba(61,90,128,0.6)" stroke-width="1"/>
-              <line x1="1" y1="27" x2="13" y2="27" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
-              <line x1="1" y1="54" x2="13" y2="54" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
-              <line x1="1" y1="81" x2="13" y2="81" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
-              <line x1="1" y1="108" x2="13" y2="108" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
-              <line x1="1" y1="135" x2="13" y2="135" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+              <!-- Stabilizer rail -->
+              <rect x="3" y="2" width="8" height="158" rx="4" fill="#2d4a6e" stroke="rgba(61,90,128,0.7)" stroke-width="1"/>
+              <!-- Rail metallic sheen -->
+              <rect x="3.5" y="8" width="2.5" height="144" rx="1.25" fill="rgba(100,150,210,0.18)"/>
+              <!-- Upper polycentric hinge joint -->
+              <ellipse cx="7" cy="38" rx="6.5" ry="8" fill="#1b3050" stroke="#4a7aaa" stroke-width="1.5"/>
+              <ellipse cx="7" cy="38" rx="3.5" ry="4.5" fill="#2d4a6e"/>
+              <circle cx="7" cy="38" r="1.5" fill="#6aadee" opacity="0.75"/>
+              <!-- Lower polycentric hinge joint -->
+              <ellipse cx="7" cy="124" rx="6.5" ry="8" fill="#1b3050" stroke="#4a7aaa" stroke-width="1.5"/>
+              <ellipse cx="7" cy="124" rx="3.5" ry="4.5" fill="#2d4a6e"/>
+              <circle cx="7" cy="124" r="1.5" fill="#6aadee" opacity="0.75"/>
+              <!-- Screw details at rail ends -->
+              <circle cx="7" cy="12" r="3" fill="#1a2d40" stroke="#4a7aaa" stroke-width="0.9"/>
+              <line x1="5" y1="12" x2="9" y2="12" stroke="#4a7aaa" stroke-width="0.8"/>
+              <circle cx="7" cy="150" r="3" fill="#1a2d40" stroke="#4a7aaa" stroke-width="0.9"/>
+              <line x1="5" y1="150" x2="9" y2="150" stroke="#4a7aaa" stroke-width="0.8"/>
             </svg>
             <div class="e-label e-label-below"><strong>Medial Stabilizer</strong>Inner-side support for lateral cuts</div>
           </div>
@@ -2151,36 +2181,95 @@
           <!-- Layer 3 — Lateral Stabilizer (flies right) -->
           <div class="e-layer" id="el-stab-r" style="z-index:2">
             <svg width="19" height="219" viewBox="0 0 14 162">
-              <rect x="1" y="1" width="12" height="160" rx="6" fill="#2d4a6e" stroke="rgba(61,90,128,0.6)" stroke-width="1"/>
-              <line x1="1" y1="27" x2="13" y2="27" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
-              <line x1="1" y1="54" x2="13" y2="54" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
-              <line x1="1" y1="81" x2="13" y2="81" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
-              <line x1="1" y1="108" x2="13" y2="108" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
-              <line x1="1" y1="135" x2="13" y2="135" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+              <!-- Stabilizer rail -->
+              <rect x="3" y="2" width="8" height="158" rx="4" fill="#2d4a6e" stroke="rgba(61,90,128,0.7)" stroke-width="1"/>
+              <!-- Rail metallic sheen -->
+              <rect x="3.5" y="8" width="2.5" height="144" rx="1.25" fill="rgba(100,150,210,0.18)"/>
+              <!-- Upper polycentric hinge joint -->
+              <ellipse cx="7" cy="38" rx="6.5" ry="8" fill="#1b3050" stroke="#4a7aaa" stroke-width="1.5"/>
+              <ellipse cx="7" cy="38" rx="3.5" ry="4.5" fill="#2d4a6e"/>
+              <circle cx="7" cy="38" r="1.5" fill="#6aadee" opacity="0.75"/>
+              <!-- Lower polycentric hinge joint -->
+              <ellipse cx="7" cy="124" rx="6.5" ry="8" fill="#1b3050" stroke="#4a7aaa" stroke-width="1.5"/>
+              <ellipse cx="7" cy="124" rx="3.5" ry="4.5" fill="#2d4a6e"/>
+              <circle cx="7" cy="124" r="1.5" fill="#6aadee" opacity="0.75"/>
+              <!-- Screw details at rail ends -->
+              <circle cx="7" cy="12" r="3" fill="#1a2d40" stroke="#4a7aaa" stroke-width="0.9"/>
+              <line x1="5" y1="12" x2="9" y2="12" stroke="#4a7aaa" stroke-width="0.8"/>
+              <circle cx="7" cy="150" r="3" fill="#1a2d40" stroke="#4a7aaa" stroke-width="0.9"/>
+              <line x1="5" y1="150" x2="9" y2="150" stroke="#4a7aaa" stroke-width="0.8"/>
             </svg>
             <div class="e-label e-label-below"><strong>Lateral Stabilizer</strong>Outer-side support for pivots &amp; landings</div>
           </div>
 
           <!-- Layer 4 — Patellar Strap (flies lower-left) -->
           <div class="e-layer" id="el-strap" style="z-index:3">
-            <svg width="151" height="22" viewBox="0 0 112 16">
-              <rect x="1" y="1" width="110" height="14" rx="7" fill="rgba(255,255,255,0.86)" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
-              <rect x="44" y="3" width="24" height="10" rx="3" fill="rgba(0,0,0,0.22)" stroke="rgba(255,255,255,0.45)" stroke-width="1"/>
-              <line x1="8" y1="5" x2="41" y2="5" stroke="rgba(0,0,0,0.15)" stroke-width="1" stroke-dasharray="3,2"/>
-              <line x1="71" y1="5" x2="104" y2="5" stroke="rgba(0,0,0,0.15)" stroke-width="1" stroke-dasharray="3,2"/>
+            <svg width="151" height="26" viewBox="0 0 112 19">
+              <!-- Strap body — dark neoprene -->
+              <rect x="1" y="2" width="110" height="15" rx="7" fill="#1e1e1e" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+              <!-- Velcro end — left -->
+              <rect x="3" y="4" width="22" height="11" rx="4" fill="#2a2a2a" stroke="rgba(255,255,255,0.1)" stroke-width="0.8"/>
+              <line x1="5" y1="7" x2="23" y2="7" stroke="rgba(255,255,255,0.08)" stroke-width="0.7" stroke-dasharray="2,1.5"/>
+              <line x1="5" y1="10" x2="23" y2="10" stroke="rgba(255,255,255,0.08)" stroke-width="0.7" stroke-dasharray="2,1.5"/>
+              <line x1="5" y1="13" x2="23" y2="13" stroke="rgba(255,255,255,0.08)" stroke-width="0.7" stroke-dasharray="2,1.5"/>
+              <!-- Center adjustable buckle (silver) -->
+              <rect x="44" y="1" width="24" height="17" rx="4" fill="#666" stroke="#999" stroke-width="1"/>
+              <rect x="46" y="3" width="20" height="13" rx="3" fill="#777"/>
+              <line x1="56" y1="3" x2="56" y2="16" stroke="#555" stroke-width="1"/>
+              <!-- Velcro end — right -->
+              <rect x="87" y="4" width="22" height="11" rx="4" fill="#2a2a2a" stroke="rgba(255,255,255,0.1)" stroke-width="0.8"/>
+              <line x1="89" y1="7" x2="107" y2="7" stroke="rgba(255,255,255,0.08)" stroke-width="0.7" stroke-dasharray="2,1.5"/>
+              <line x1="89" y1="10" x2="107" y2="10" stroke="rgba(255,255,255,0.08)" stroke-width="0.7" stroke-dasharray="2,1.5"/>
+              <line x1="89" y1="13" x2="107" y2="13" stroke="rgba(255,255,255,0.08)" stroke-width="0.7" stroke-dasharray="2,1.5"/>
+              <!-- Edge stitching on strap body -->
+              <line x1="27" y1="5" x2="43" y2="5" stroke="rgba(255,255,255,0.06)" stroke-width="0.7" stroke-dasharray="2,2"/>
+              <line x1="69" y1="5" x2="84" y2="5" stroke="rgba(255,255,255,0.06)" stroke-width="0.7" stroke-dasharray="2,2"/>
             </svg>
             <div class="e-label"><strong>Patellar Strap</strong>Targeted tendon compression strap</div>
           </div>
 
           <!-- Layer 5 — Smart Chip (flies lower-right) -->
           <div class="e-layer" id="el-chip" style="z-index:4">
-            <svg width="51" height="51" viewBox="0 0 38 38">
-              <rect x="2" y="2" width="34" height="34" rx="7" fill="#040d0a" stroke="#00d4aa" stroke-width="1.5"/>
-              <rect x="7" y="7" width="24" height="24" rx="3" fill="none" stroke="rgba(0,212,170,0.3)" stroke-width="1"/>
-              <line x1="19" y1="7" x2="19" y2="31" stroke="rgba(0,212,170,0.22)" stroke-width="1"/>
-              <line x1="7" y1="19" x2="31" y2="19" stroke="rgba(0,212,170,0.22)" stroke-width="1"/>
-              <circle cx="19" cy="19" r="5" fill="#00d4aa"/>
-              <circle cx="19" cy="19" r="5" fill="#00d4aa" opacity="0.3" style="animation:blink 1.8s ease-in-out infinite"/>
+            <svg width="56" height="56" viewBox="0 0 42 42">
+              <!-- PCB body -->
+              <rect x="1" y="1" width="40" height="40" rx="6" fill="#050e06" stroke="#00d4aa" stroke-width="1.5"/>
+              <!-- Circuit trace grid -->
+              <line x1="14" y1="8" x2="14" y2="34" stroke="rgba(0,212,170,0.2)" stroke-width="0.8"/>
+              <line x1="21" y1="8" x2="21" y2="34" stroke="rgba(0,212,170,0.2)" stroke-width="0.8"/>
+              <line x1="28" y1="8" x2="28" y2="34" stroke="rgba(0,212,170,0.2)" stroke-width="0.8"/>
+              <line x1="8" y1="14" x2="34" y2="14" stroke="rgba(0,212,170,0.2)" stroke-width="0.8"/>
+              <line x1="8" y1="21" x2="34" y2="21" stroke="rgba(0,212,170,0.2)" stroke-width="0.8"/>
+              <line x1="8" y1="28" x2="34" y2="28" stroke="rgba(0,212,170,0.2)" stroke-width="0.8"/>
+              <!-- IC package -->
+              <rect x="14" y="14" width="14" height="14" rx="2" fill="#030a04" stroke="#00d4aa" stroke-width="1.5"/>
+              <!-- Glowing LED center -->
+              <circle cx="21" cy="21" r="4" fill="#00d4aa"/>
+              <circle cx="21" cy="21" r="4" fill="#00d4aa" opacity="0.3" style="animation:blink 1.8s ease-in-out infinite"/>
+              <!-- Pin connectors — left -->
+              <rect x="3" y="15" width="6" height="2" rx="1" fill="rgba(0,212,170,0.65)"/>
+              <rect x="3" y="19" width="6" height="2" rx="1" fill="rgba(0,212,170,0.65)"/>
+              <rect x="3" y="23" width="6" height="2" rx="1" fill="rgba(0,212,170,0.65)"/>
+              <rect x="3" y="27" width="6" height="2" rx="1" fill="rgba(0,212,170,0.65)"/>
+              <!-- Pin connectors — right -->
+              <rect x="33" y="15" width="6" height="2" rx="1" fill="rgba(0,212,170,0.65)"/>
+              <rect x="33" y="19" width="6" height="2" rx="1" fill="rgba(0,212,170,0.65)"/>
+              <rect x="33" y="23" width="6" height="2" rx="1" fill="rgba(0,212,170,0.65)"/>
+              <rect x="33" y="27" width="6" height="2" rx="1" fill="rgba(0,212,170,0.65)"/>
+              <!-- Pin connectors — top -->
+              <rect x="15" y="3" width="2" height="6" rx="1" fill="rgba(0,212,170,0.65)"/>
+              <rect x="19" y="3" width="2" height="6" rx="1" fill="rgba(0,212,170,0.65)"/>
+              <rect x="23" y="3" width="2" height="6" rx="1" fill="rgba(0,212,170,0.65)"/>
+              <rect x="27" y="3" width="2" height="6" rx="1" fill="rgba(0,212,170,0.65)"/>
+              <!-- Pin connectors — bottom -->
+              <rect x="15" y="33" width="2" height="6" rx="1" fill="rgba(0,212,170,0.65)"/>
+              <rect x="19" y="33" width="2" height="6" rx="1" fill="rgba(0,212,170,0.65)"/>
+              <rect x="23" y="33" width="2" height="6" rx="1" fill="rgba(0,212,170,0.65)"/>
+              <rect x="27" y="33" width="2" height="6" rx="1" fill="rgba(0,212,170,0.65)"/>
+              <!-- Corner SMD components -->
+              <circle cx="8" cy="8" r="2.2" fill="#071208" stroke="rgba(0,212,170,0.35)" stroke-width="0.8"/>
+              <circle cx="34" cy="8" r="2.2" fill="#071208" stroke="rgba(0,212,170,0.35)" stroke-width="0.8"/>
+              <circle cx="8" cy="34" r="2.2" fill="#071208" stroke="rgba(0,212,170,0.35)" stroke-width="0.8"/>
+              <circle cx="34" cy="34" r="2.2" fill="#071208" stroke="rgba(0,212,170,0.35)" stroke-width="0.8"/>
             </svg>
             <div class="e-label"><strong>Smart Chip</strong>Impact sensor, syncs to Tendon X app</div>
           </div>
@@ -2188,11 +2277,25 @@
           <!-- Layer 6 — Sport Padding (flies upper-right) -->
           <div class="e-layer" id="el-padding" style="z-index:5">
             <svg width="130" height="97" viewBox="0 0 96 72">
-              <rect x="2" y="2" width="92" height="68" rx="18" fill="rgba(0,212,170,0.14)" stroke="rgba(0,212,170,0.5)" stroke-width="1.5"/>
-              <line x1="14" y1="18" x2="82" y2="18" stroke="rgba(0,212,170,0.14)" stroke-width="1"/>
-              <line x1="10" y1="33" x2="86" y2="33" stroke="rgba(0,212,170,0.14)" stroke-width="1"/>
-              <line x1="10" y1="48" x2="86" y2="48" stroke="rgba(0,212,170,0.14)" stroke-width="1"/>
-              <line x1="14" y1="58" x2="82" y2="58" stroke="rgba(0,212,170,0.08)" stroke-width="1"/>
+              <!-- Patellar pad — donut/annulus shape (ring that surrounds kneecap) -->
+              <!-- Outer foam ring -->
+              <ellipse cx="48" cy="36" rx="44" ry="32" fill="rgba(0,212,170,0.16)" stroke="rgba(0,212,170,0.62)" stroke-width="1.8"/>
+              <!-- Inner cutout (the patellar opening) -->
+              <ellipse cx="48" cy="36" rx="26" ry="19" fill="#090909" stroke="rgba(0,212,170,0.18)" stroke-width="1"/>
+              <!-- Foam texture — radial hash marks on pad ring -->
+              <line x1="14" y1="14" x2="21" y2="20" stroke="rgba(0,212,170,0.12)" stroke-width="0.9"/>
+              <line x1="18" y1="10" x2="25" y2="17" stroke="rgba(0,212,170,0.12)" stroke-width="0.9"/>
+              <line x1="72" y1="14" x2="79" y2="20" stroke="rgba(0,212,170,0.12)" stroke-width="0.9"/>
+              <line x1="68" y1="10" x2="75" y2="17" stroke="rgba(0,212,170,0.12)" stroke-width="0.9"/>
+              <line x1="14" y1="58" x2="21" y2="52" stroke="rgba(0,212,170,0.12)" stroke-width="0.9"/>
+              <line x1="18" y1="62" x2="25" y2="56" stroke="rgba(0,212,170,0.12)" stroke-width="0.9"/>
+              <line x1="72" y1="58" x2="79" y2="52" stroke="rgba(0,212,170,0.12)" stroke-width="0.9"/>
+              <line x1="68" y1="62" x2="75" y2="56" stroke="rgba(0,212,170,0.12)" stroke-width="0.9"/>
+              <!-- Gel compression dots along pad ring -->
+              <ellipse cx="48" cy="6" rx="10" ry="3.5" fill="none" stroke="rgba(0,212,170,0.1)" stroke-width="1"/>
+              <ellipse cx="48" cy="66" rx="10" ry="3.5" fill="none" stroke="rgba(0,212,170,0.1)" stroke-width="1"/>
+              <ellipse cx="7" cy="36" rx="3.5" ry="9" fill="none" stroke="rgba(0,212,170,0.1)" stroke-width="1"/>
+              <ellipse cx="89" cy="36" rx="3.5" ry="9" fill="none" stroke="rgba(0,212,170,0.1)" stroke-width="1"/>
             </svg>
             <div class="e-label e-label-below"><strong>Impact Padding</strong>Sport-specific absorption pad</div>
           </div>
@@ -2200,14 +2303,38 @@
           <!-- Layer 7 — Outer Shell (topmost assembled, flies upper-left) -->
           <div class="e-layer" id="el-shell" style="z-index:6">
             <svg width="154" height="289" viewBox="0 0 114 214">
-              <rect x="2" y="2" width="110" height="210" rx="55" fill="#1c1c1c" stroke="rgba(255,255,255,0.15)" stroke-width="1.5"/>
-              <line x1="24" y1="44" x2="90" y2="44" stroke="rgba(255,255,255,0.045)" stroke-width="1"/>
-              <line x1="18" y1="64" x2="96" y2="64" stroke="rgba(255,255,255,0.045)" stroke-width="1"/>
-              <line x1="15" y1="84" x2="99" y2="84" stroke="rgba(255,255,255,0.045)" stroke-width="1"/>
-              <line x1="15" y1="107" x2="99" y2="107" stroke="rgba(255,255,255,0.045)" stroke-width="1"/>
-              <line x1="15" y1="130" x2="99" y2="130" stroke="rgba(255,255,255,0.045)" stroke-width="1"/>
-              <line x1="18" y1="150" x2="96" y2="150" stroke="rgba(255,255,255,0.045)" stroke-width="1"/>
-              <line x1="24" y1="170" x2="90" y2="170" stroke="rgba(255,255,255,0.045)" stroke-width="1"/>
+              <!-- Brace body — organic knee-brace silhouette (NOT a pill shape) -->
+              <path d="M26,5 Q6,5 6,28 L8,70 Q4,86 4,100 Q4,114 8,130 L6,170 Q6,209 26,209 L88,209 Q108,209 108,170 L106,130 Q110,114 110,100 Q110,86 106,70 L108,28 Q108,5 88,5 Z" fill="#1c1c1c" stroke="rgba(255,255,255,0.13)" stroke-width="1.5"/>
+              <!-- Top cuff — structured upper band -->
+              <path d="M26,5 Q6,5 6,28 L10,28 Q10,14 26,14 L88,14 Q104,14 104,28 L108,28 Q108,5 88,5 Z" fill="#262626"/>
+              <line x1="12" y1="19" x2="102" y2="19" stroke="rgba(255,255,255,0.06)" stroke-width="0.8"/>
+              <!-- Side stabilizer channels (blue grooves) -->
+              <rect x="6" y="28" width="8" height="154" rx="4" fill="#192840" stroke="rgba(61,90,128,0.45)" stroke-width="1"/>
+              <rect x="100" y="28" width="8" height="154" rx="4" fill="#192840" stroke="rgba(61,90,128,0.45)" stroke-width="1"/>
+              <!-- Upper compression ribs -->
+              <rect x="18" y="28" width="78" height="6" rx="2" fill="#262626" stroke="rgba(255,255,255,0.08)"/>
+              <rect x="16" y="40" width="82" height="6" rx="2" fill="#242424" stroke="rgba(255,255,255,0.07)"/>
+              <rect x="15" y="52" width="84" height="6" rx="2" fill="#242424" stroke="rgba(255,255,255,0.07)"/>
+              <rect x="15" y="64" width="84" height="6" rx="2" fill="#242424" stroke="rgba(255,255,255,0.07)"/>
+              <rect x="15" y="76" width="84" height="6" rx="2" fill="#242424" stroke="rgba(255,255,255,0.07)"/>
+              <!-- Patellar window — the defining knee-brace feature -->
+              <ellipse cx="57" cy="110" rx="28" ry="34" fill="none" stroke="rgba(0,212,170,0.1)" stroke-width="1"/>
+              <ellipse cx="57" cy="110" rx="23" ry="29" fill="#090909" stroke="rgba(0,212,170,0.72)" stroke-width="2"/>
+              <ellipse cx="57" cy="110" rx="18" ry="23" fill="none" stroke="rgba(0,212,170,0.22)" stroke-width="1"/>
+              <!-- Hinge pivot points visible in stabilizer channels -->
+              <circle cx="10" cy="72" r="5" fill="#2d4a6e" stroke="#4a7aaa" stroke-width="1.2"/>
+              <circle cx="10" cy="148" r="5" fill="#2d4a6e" stroke="#4a7aaa" stroke-width="1.2"/>
+              <circle cx="104" cy="72" r="5" fill="#2d4a6e" stroke="#4a7aaa" stroke-width="1.2"/>
+              <circle cx="104" cy="148" r="5" fill="#2d4a6e" stroke="#4a7aaa" stroke-width="1.2"/>
+              <!-- Lower compression ribs -->
+              <rect x="15" y="146" width="84" height="6" rx="2" fill="#242424" stroke="rgba(255,255,255,0.07)"/>
+              <rect x="15" y="158" width="84" height="6" rx="2" fill="#242424" stroke="rgba(255,255,255,0.07)"/>
+              <rect x="15" y="170" width="84" height="6" rx="2" fill="#242424" stroke="rgba(255,255,255,0.07)"/>
+              <rect x="16" y="182" width="82" height="6" rx="2" fill="#242424" stroke="rgba(255,255,255,0.07)"/>
+              <rect x="18" y="194" width="78" height="6" rx="2" fill="#262626" stroke="rgba(255,255,255,0.08)"/>
+              <!-- Bottom cuff -->
+              <path d="M26,209 Q6,209 6,186 L10,186 Q10,201 26,201 L88,201 Q104,201 104,186 L108,186 Q108,209 88,209 Z" fill="#262626"/>
+              <line x1="12" y1="196" x2="102" y2="196" stroke="rgba(255,255,255,0.06)" stroke-width="0.8"/>
             </svg>
             <div class="e-label e-label-below"><strong>Outer Shell</strong>Moisture-wicking compression fabric</div>
           </div>
@@ -2471,14 +2598,12 @@
 
         <!-- Tall card -->
         <div class="athlete-card athlete-card-tall reveal">
-          <!--
-            ADD PHOTO: athlete-1.jpg
-            Suggested prompt: "female volleyball player diving for a ball, wearing black knee sleeve with teal chip, dramatic lighting, dark background, action shot"
-            Uncomment: <img src="athlete-1.jpg" alt="Volleyball player wearing Tendon X" />
-          -->
+          <img src="https://images.unsplash.com/photo-1552674605-db6ffd4facb5?auto=format&fit=crop&w=600&q=80"
+               alt="Volleyball player in action"
+               onerror="this.style.display='none'" />
           <div class="athlete-placeholder">
             <div class="athlete-placeholder-icon">🏐</div>
-            <div class="athlete-placeholder-text">Volleyball · athlete-1.jpg</div>
+            <div class="athlete-placeholder-text">Volleyball</div>
           </div>
           <div class="athlete-card-overlay">
             <div class="athlete-card-label">On Every Dive</div>
@@ -2489,14 +2614,12 @@
         <!-- Right column — two stacked -->
         <div style="display:flex;flex-direction:column;gap:16px;">
           <div class="athlete-card athlete-card-sq reveal" style="transition-delay:0.1s">
-            <!--
-              ADD PHOTO: athlete-2.jpg
-              Suggested prompt: "male basketball player jumping for a layup, wearing black knee sleeve, dark gym background, teal lighting accent"
-              Uncomment: <img src="athlete-2.jpg" alt="Basketball player wearing Tendon X" />
-            -->
+            <img src="https://images.unsplash.com/photo-1546519638405-a2f9ce4b8a5a?auto=format&fit=crop&w=600&q=80"
+                 alt="Basketball player jumping"
+                 onerror="this.style.display='none'" />
             <div class="athlete-placeholder">
               <div class="athlete-placeholder-icon">🏀</div>
-              <div class="athlete-placeholder-text">Basketball · athlete-2.jpg</div>
+              <div class="athlete-placeholder-text">Basketball</div>
             </div>
             <div class="athlete-card-overlay">
               <div class="athlete-card-label">Game-Day Ready</div>
@@ -2504,18 +2627,16 @@
             </div>
           </div>
           <div class="athlete-card athlete-card-sq reveal" style="transition-delay:0.2s">
-            <!--
-              ADD PHOTO: athlete-3.jpg
-              Suggested prompt: "close-up of athlete's knee wearing Tendon X black sleeve with glowing teal microchip, dark background, cinematic"
-              Uncomment: <img src="athlete-3.jpg" alt="Close up of Tendon X knee sleeve and chip" />
-            -->
+            <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=600&q=80"
+                 alt="Athlete in training"
+                 onerror="this.style.display='none'" />
             <div class="athlete-placeholder">
-              <div class="athlete-placeholder-icon">💡</div>
-              <div class="athlete-placeholder-text">Product shot · athlete-3.jpg</div>
+              <div class="athlete-placeholder-icon">🏃</div>
+              <div class="athlete-placeholder-text">Training</div>
             </div>
             <div class="athlete-card-overlay">
-              <div class="athlete-card-label">The Chip. Live.</div>
-              <div class="athlete-card-sport">Smart Technology</div>
+              <div class="athlete-card-label">Train Harder</div>
+              <div class="athlete-card-sport">Performance</div>
             </div>
           </div>
         </div>
